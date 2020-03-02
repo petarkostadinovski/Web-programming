@@ -44,4 +44,31 @@ public class KeysApi {
     public void deleteKey(@PathVariable String id){
          keyService.deleteKey(id);
     }
+
+    @GetMapping(params = "price")
+    public List<Key> searchByPrice(@RequestParam int price)
+    {
+        return keyService.searchKeyByPrice(price);
+    }
+
+    @GetMapping(params = "size")
+    public List<Key> searchBySize(@RequestParam Double size)
+    {
+        return keyService.searchKeyBySize(size);
+    }
+
+    @GetMapping(params = "onStock")
+    public List<Key> searchOnStock(@RequestParam boolean onStock)
+    {
+        return keyService.searchOnStock(onStock);
+    }
+
+    @GetMapping(params = {"size","price"})
+    public List<Key> searchBySizeAndPrice(@RequestParam Double size,
+                                          @RequestParam int price)
+    {
+        return keyService.searchKeyByPriceAndSize(price,size);
+    }
+
+
 }

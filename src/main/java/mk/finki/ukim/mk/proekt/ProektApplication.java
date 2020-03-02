@@ -10,7 +10,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-@ServletComponentScan
 @SpringBootApplication
 public class ProektApplication {
 

@@ -9,13 +9,11 @@ import java.util.Optional;
 public interface CarService {
    // String carId, String carBrand, String carModel
 
-    Car createCar(String carId, String carBrand, String carModel);
+    Car createCar(String carId, String carBrand, String carModel,int year);
 
     Car createCar(Car c);
 
     List<Car> getAllCars();
-
-    List<Car> searchCars (String brand);
 
     Optional<Car> getCar(String carId);
 
@@ -24,4 +22,11 @@ public interface CarService {
     Car updateCar(String carId, Car c);
 
     void deleteCar(String carId);
+
+    List<Car> searchCarsNewerThan(int year);
+
+    List<Car> searchCarsOlderThan(int year);
+
+    List<Car> searchCars (String brand, String model, int year);
+
 }

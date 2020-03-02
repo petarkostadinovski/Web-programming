@@ -8,7 +8,7 @@ import java.util.Optional;
 
 
 public interface KeyService {
-    Key createKey(String name, double size, String description, int price, boolean onStock);
+    Key createKey(String name, double size, String description, int price, boolean onStock,String imageUrl);
 
     Key createKey(Key k);
 
@@ -20,10 +20,18 @@ public interface KeyService {
 
     Optional<Key> getKey(String name);
 
-    Key updateKey(String name, double size, String description, int price, boolean onStock);
+    Key updateKey(String name, double size, String description, int price, boolean onStock,String imageUrl);
 
     Key updateKey(String name, Key k);
 
     void deleteKey(String name);
+
+    List<Key> searchKeyByPrice(int price);
+
+    List<Key> searchKeyBySize(Double size);
+
+    List<Key> searchOnStock(boolean onStock);
+
+    List<Key> searchKeyByPriceAndSize(int price, Double size);
 
 }

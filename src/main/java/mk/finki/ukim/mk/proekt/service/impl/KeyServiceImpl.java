@@ -18,8 +18,8 @@ public class KeyServiceImpl implements KeyService {
     }
 
     @Override
-    public Key createKey(String name, double size, String description, int price, boolean onStock) {
-        Key key = new Key(name,size,description,price,onStock);
+    public Key createKey(String name, double size, String description, int price, boolean onStock,String imageUrl) {
+        Key key = new Key(name,size,description,price,onStock,imageUrl);
         return this.keyRepository.save(key);
     }
 
@@ -51,13 +51,42 @@ public class KeyServiceImpl implements KeyService {
     }
 
     @Override
-    public Key updateKey(String name, double size, String description, int price, boolean onStock) {
+    public List<Key> searchKeyBySize(Double size) {
+        return keyRepository.findAll().stream()
+                .filter(key -> key.getSize() == size)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Key> searchKeyByPrice(int price) {
+        return keyRepository.findAll().stream()
+                .filter(key -> key.getPrice() == price)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Key> searchOnStock(boolean onStock) {
+        return keyRepository.findAll().stream()
+                .filter(key -> key.isOnStock() == onStock)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Key> searchKeyByPriceAndSize(int price, Double size) {
+        return keyRepository.findAll().stream()
+                .filter(key -> key.getPrice()==price && key.getSize()==size)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Key updateKey(String name, double size, String description, int price, boolean onStock,String imageUrl) {
         Key key = keyRepository.findById(name).orElse(null);
         if(key != null) {
             key.setSize(size);
             key.setDescription(description);
             key.setPrice(price);
             key.setOnStock(onStock);
+            key.setImageUrl(imageUrl);
         }
         return key;
     }

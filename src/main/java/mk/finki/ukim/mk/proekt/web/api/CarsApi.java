@@ -48,4 +48,24 @@ public class CarsApi {
         carService.deleteCar(id);
     }
 
+    @GetMapping(params = "yearNewer")
+    public List<Car> searchNewerThan(@RequestParam int yearNewer)
+    {
+        return carService.searchCarsNewerThan(yearNewer);
+    }
+    @GetMapping(params = "yearOlder")
+    public List<Car> searchOlderThan(@RequestParam int yearOlder)
+    {
+        return carService.searchCarsOlderThan(yearOlder);
+    }
+
+    @GetMapping(params = {"carBrand","carModel","year"})
+    public List<Car> searchCars(@RequestParam String carBrand,
+                                          @RequestParam String carModel,
+                                          @RequestParam int year)
+    {
+        return carService.searchCars(carBrand,carModel,year);
+    }
+
+
 }

@@ -18,10 +18,34 @@ public class CarServiceImpl implements CarService {
     CarServiceImpl(CarRepository carRepository){
         this.carRepository = carRepository;
     }
-//String carId, String carBrand, String carModel
+
     @Override
-    public Car createCar(String id, String brand, String model) {
-        Car car = new Car(id, brand, model);
+    public List<Car> searchCars(String carBrand, String carModel, int year) {
+        return this.carRepository.getAllCars().stream()
+                .filter(car -> car.getCarBrand().equals(carBrand)
+                        && car.getCarModel().equals(carModel)
+                        && car.getYear() == year)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Car> searchCarsNewerThan(int year) {
+        return this.carRepository.getAllCars().stream()
+                .filter(car -> car.getYear() > year)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Car> searchCarsOlderThan(int year) {
+        return this.carRepository.getAllCars().stream()
+                .filter(car -> car.getYear() < year)
+                .collect(Collectors.toList());
+    }
+
+    //String carId, String carBrand, String carModel
+    @Override
+    public Car createCar(String id, String brand, String model,int year) {
+        Car car = new Car(id, brand, model,year);
         return this.carRepository.save(car);
     }
 
@@ -33,11 +57,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAllCars() {
         return this.carRepository.getAllCars();
-    }
-
-    @Override
-    public List<Car> searchCars(String brand) {
-        return this.carRepository.searchCars(brand);
     }
 
     @Override

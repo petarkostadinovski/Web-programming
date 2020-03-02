@@ -6,8 +6,11 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity(name = "Keys")
+@Data
+@Table(name = "Keys")
 public class Key {
 
     @Id
@@ -17,15 +20,17 @@ public class Key {
     private String description;
     private int price;
     private boolean onStock;
+    private String imageUrl;
 
     public Key(){}
 
-    public Key(String name, double size, String description, int price, boolean onStock){
+    public Key(String name, double size, String description, int price, boolean onStock, String imageUrl){
         this.name = name;
         this.size = size;
         this.description = description;
         this.price = price;
         this.onStock = onStock;
+        this.imageUrl = imageUrl;
     }
 
     public boolean isOnStock() {
@@ -66,6 +71,14 @@ public class Key {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override

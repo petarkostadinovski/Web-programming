@@ -1,6 +1,8 @@
 package mk.finki.ukim.mk.proekt.repository;
 
 import mk.finki.ukim.mk.proekt.model.Car;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;

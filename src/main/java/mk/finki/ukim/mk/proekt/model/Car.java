@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity(name = "Cars")
+@Data
 public class Car {
 
     @Id
@@ -24,13 +25,24 @@ public class Car {
     private String carBrand;
     private String carModel;
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    private int year;
+
     public Car(){
         keyList = new ArrayList<>();
     }
-    public Car(String carId, String carBrand, String carModel){
+    public Car(String carId, String carBrand, String carModel, int year){
         this.carId = carId;
         this.carBrand = carBrand;
         this.carModel = carModel;
+        this.year = year;
         keyList = new ArrayList<>();
     }
 
