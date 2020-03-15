@@ -6,14 +6,12 @@ import mk.finki.ukim.mk.proekt.model.Car;
 import mk.finki.ukim.mk.proekt.model.Key;
 import mk.finki.ukim.mk.proekt.repository.jpa.JpaCarRepository;
 import mk.finki.ukim.mk.proekt.repository.jpa.JpaKeyRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Getter
@@ -29,21 +27,36 @@ public class DataHolder {
     DataHolder(JpaCarRepository carRepository, JpaKeyRepository keyRepository){
         this.carRepository = carRepository;
         this.keyRepository = keyRepository;
+
     }
 
     @PostConstruct
     public void init(){
 
-        keyList.add(new Key("u5d",13,"u5d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg"));
-        keyList.add(new Key("u1d",15,"u1d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg"));
-        keyList.add(new Key("sf6",17,"sf6 description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg"));
-        keyList.add(new Key("m3f",15,"m3f description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg"));
 
-        carList.add(new Car("1234","Audi","A3",2006));
+        final Car AudiA32004= new Car("2341","Audi","A3",2004);
+        final Car MercedesC220 = new Car("1151","Mercedes","C220",2010);
+        final Car MercedesC220_1 = new Car("12345","Mercedes","C220",2012);
+        final Car MercedesC200 = new Car("1121","Mercedes","C200",2015);
 
-        this.carRepository.saveAll(carList);
-        this.keyRepository.saveAll(keyList);
 
+        Key k = new Key("AudiA3_2004",13,"u5d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004);
+        keyList.add(k);
+        keyList.add(new Key("benz2",15,"u1d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220));
+        keyList.add(new Key("benz3",15,"u1d description ...",100,false,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220));
+        keyList.add(new Key("bbbbbbbbbb",15,"u1d description ...",100,false,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220_1));
+        keyList.add(new Key("AudiA3_2004_1",17,"sf6 description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004));
+        keyList.add(new Key("BENZC220_2010",15,"m3f description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", MercedesC220));
+
+        carList.add(AudiA32004);
+        carList.add(MercedesC220);
+        carList.add(MercedesC220_1);
+        carList.add(MercedesC200);
+
+        if(this.carRepository.count() == 0) {
+            this.carRepository.saveAll(carList);
+            this.keyRepository.saveAll(keyList);
+        }
     }
 
 }

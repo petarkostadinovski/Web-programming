@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.proekt.web.api;
 
+import mk.finki.ukim.mk.proekt.exceptions.CarNotFoundException;
 import mk.finki.ukim.mk.proekt.model.Car;
 import mk.finki.ukim.mk.proekt.model.Key;
 import mk.finki.ukim.mk.proekt.service.CarService;
@@ -59,13 +60,27 @@ public class CarsApi {
         return carService.searchCarsOlderThan(yearOlder);
     }
 
-    @GetMapping(params = {"carBrand","carModel","year"})
-    public List<Car> searchCars(@RequestParam String carBrand,
-                                          @RequestParam String carModel,
-                                          @RequestParam int year)
-    {
-        return carService.searchCars(carBrand,carModel,year);
-    }
+//    @GetMapping(params = {"carBrand","carModel","year"})
+//    public List<Car> searchCar(@RequestParam String carBrand,
+//                                @RequestParam String carModel,
+//                                @RequestParam int year)
+//    {
+//        return carService.searchCars(carBrand,carModel,year);
+//    }
+
+   @GetMapping(params = {"carBrand","carModel","year"})
+   public List<Key> searchCars(@RequestParam String carBrand,
+                               @RequestParam String carModel,
+                               @RequestParam int year) throws CarNotFoundException
+   {
+       return carService.searchKeysByCar(carBrand,carModel,year);
+   }
+   @GetMapping(params = {"carBrand","carModel"})
+   public List<Key> searchCarsBrandModel(@RequestParam String carBrand,
+                               @RequestParam String carModel) throws CarNotFoundException
+   {
+       return carService.searchKeysByCarBrandModel(carBrand,carModel);
+   }
 
 
 }

@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.proekt.service.impl;
 
+import mk.finki.ukim.mk.proekt.exceptions.CarNotFoundException;
 import mk.finki.ukim.mk.proekt.model.Car;
 import mk.finki.ukim.mk.proekt.model.Key;
 import mk.finki.ukim.mk.proekt.repository.CarRepository;
@@ -7,6 +8,7 @@ import mk.finki.ukim.mk.proekt.repository.KeyRepository;
 import mk.finki.ukim.mk.proekt.service.CarService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,8 +17,10 @@ import java.util.stream.Collectors;
 public class CarServiceImpl implements CarService {
 
     CarRepository carRepository;
-    CarServiceImpl(CarRepository carRepository){
+    KeyRepository keyRepository;
+    CarServiceImpl(CarRepository carRepository, KeyRepository keyRepository){
         this.carRepository = carRepository;
+        this.keyRepository = keyRepository;
     }
 
     @Override
@@ -28,6 +32,28 @@ public class CarServiceImpl implements CarService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Key> searchKeysByCarBrandModel(String carBrand, String carModel) throws CarNotFoundException{
+
+        List<Car> cars =  this.carRepository.getAllCars().stream()
+                .filter(car -> car.getCarBrand().equals(carBrand)
+                        && car.getCarModel().equals(carModel)).collect(Collectors.toList());
+
+        return cars.stream()
+                .flatMap(car -> car.getKeyList().stream())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Key> searchKeysByCar(String carBrand, String carModel, int year) throws CarNotFoundException{
+
+        Car car1 =  this.carRepository.getAllCars().stream()
+                .filter(car -> car.getCarBrand().equals(carBrand)
+                        && car.getCarModel().equals(carModel)
+                        && car.getYear() == year).findFirst().orElse(this.carRepository.getAllCars().get(0));
+        return car1.getKeyList();
+
+    }
     @Override
     public List<Car> searchCarsNewerThan(int year) {
         return this.carRepository.getAllCars().stream()

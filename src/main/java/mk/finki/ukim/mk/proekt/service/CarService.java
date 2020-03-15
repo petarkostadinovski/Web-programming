@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.proekt.service;
 
+import mk.finki.ukim.mk.proekt.exceptions.CarNotFoundException;
 import mk.finki.ukim.mk.proekt.model.Car;
 import mk.finki.ukim.mk.proekt.model.Key;
 
@@ -28,5 +29,9 @@ public interface CarService {
     List<Car> searchCarsOlderThan(int year);
 
     List<Car> searchCars (String brand, String model, int year);
+
+    List<Key>  searchKeysByCarBrandModel (String brand, String model) throws CarNotFoundException;
+
+    List<Key> searchKeysByCar(String carBrand, String carModel, int year) throws CarNotFoundException;
 
 }

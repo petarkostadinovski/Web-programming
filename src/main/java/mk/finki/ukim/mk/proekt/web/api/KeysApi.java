@@ -64,7 +64,7 @@ public class KeysApi {
     }
 
     @GetMapping(params = {"size","price"})
-    public List<Key> searchBySizeAndPrice(@RequestParam Double size,
+    public List<Key> searchBySizeAndPrice(@RequestParam (required = false) Double size,
                                           @RequestParam int price)
     {
         return keyService.searchKeyByPriceAndSize(price,size);

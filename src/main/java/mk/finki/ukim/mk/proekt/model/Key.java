@@ -1,20 +1,22 @@
 package mk.finki.ukim.mk.proekt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Entity(name = "Keys")
+@Entity
 @Data
-@Table(name = "Keys")
 public class Key {
 
     @Id
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "carId")
+    @JsonIgnore
+    private Car car;
 
     private double size;
     private String description;
@@ -23,6 +25,16 @@ public class Key {
     private String imageUrl;
 
     public Key(){}
+    public Key(String name, double size, String description, int price, boolean onStock, String imageUrl,Car car){
+        this.name = name;
+        this.size = size;
+        this.description = description;
+        this.price = price;
+        this.onStock = onStock;
+        this.imageUrl = imageUrl;
+        this.car = car;
+    }
+
 
     public Key(String name, double size, String description, int price, boolean onStock, String imageUrl){
         this.name = name;
@@ -31,6 +43,14 @@ public class Key {
         this.price = price;
         this.onStock = onStock;
         this.imageUrl = imageUrl;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public boolean isOnStock() {
