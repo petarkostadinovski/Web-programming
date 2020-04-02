@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import {BrowserRouter as Router, Redirect, Route,Switch} from 'react-router-dom'
 import $ from 'jquery'
-import keyImg from "../../images/key.png"
 import "../../App.css"
 import App from "../../App";
 import KeyService from "../../Repository/axiosKeyRepository";
@@ -71,7 +70,7 @@ class SideBarComponent extends React.Component{
                     <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                         <div
                             className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                            <h1 className="h2">Welcome</h1>
+                            <h1 className="h2"></h1>
                             <div className="btn-toolbar mb-2 mb-md-0">
                                 <div>
                                     <button className="btn btn-info" type="submit" onClick={this.toggleFilterCarsModal}>Filter Cars</button>
@@ -89,7 +88,6 @@ class SideBarComponent extends React.Component{
                 <div className="aaa" id="aa">
                     <FilterCarsComponent showModal={this.state.filterCarsModal} rendered="rendered"/>
                 </div>
-
             </div>
         )
     }

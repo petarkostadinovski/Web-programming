@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ReactDOM from 'react-dom'
 
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 import '../../App.css';
 import KeyService from "../../Repository/axiosKeyRepository";
@@ -54,6 +54,14 @@ class FilterCarsComponent extends React.Component{
         if (!this.state.showModal)
          window.location.reload(false);
 
+        this.props.history.push({
+            pathname:"/cars/filteredByKeys",
+            state: {
+                carModel: this.state.carModel,
+                carBrand: this.state.carBrand,
+                year: this.state.year
+            }
+        })
         console.log("godina: " + this.state.year)
 
     };
@@ -108,14 +116,7 @@ class FilterCarsComponent extends React.Component{
                                         })}
                                     </select>
                                 </div>
-                        <Link to={{
-                            pathname:"/cars/filteredByKeys",
-                            state: {
-                                carModel: this.state.carModel,
-                                carBrand: this.state.carBrand,
-                                year: this.state.year
-                            }
-                        }}><div className="filterCarsButton"><button className="btn btn-info" id="filterButton" onClick={this.handleClick}>Filter</button></div></Link>
+                       <div className="filterCarsButton"><button className="btn btn-info" id="filterButton" onClick={this.handleClick}>Filter</button></div>
                     </div>
                 </div>
 
@@ -125,4 +126,4 @@ class FilterCarsComponent extends React.Component{
     }
 
 }
-export default FilterCarsComponent
+export default withRouter(FilterCarsComponent)

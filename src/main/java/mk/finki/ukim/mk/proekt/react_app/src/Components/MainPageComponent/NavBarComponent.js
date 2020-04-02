@@ -1,104 +1,126 @@
 import React from "react";
-import {BrowserRouter as Router, Redirect, Route,Switch} from 'react-router-dom'
+import { useState, useEffect, useBackHandler} from 'react';
+import {BrowserRouter as Router, Redirect, Route,Switch,withRouter} from 'react-router-dom'
 import "../../App.css"
-import keyImg from "../../images/key.png"
+import userProfileImage from "../../images/userProfileImage.png"
 import keyStoreLogoImg from "../../images/KeyStoreLogo.png"
 import {Link} from "react-router-dom";
-import MainPage from "./MainPage";
 import axios from "axios";
 import PasswordMask from 'react-password-mask';
+import auth from "../login/auth";
 
-class NavBarComponent extends React.Component{
+const NavBarComponent = props => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            logIn: true,
-            signUp: false,
-            username:"",
-            password:"",
-            confirmPassword:"",
-            linkToProfile: false,
-            noData: false
+    const [logIn,setLogIn] = useState(true)
+    const [signUp,setSignUp] = useState(true)
+    const [username,setUsername] = useState("")
+    const [password,setPassword] = useState("")
+    const [confirmPassword,setConfirmPassword] = useState("")
+    const [linkToProfile,setLinkToProfile] = useState(false)
+    const [noData,setNoData] = useState(false)
+    const [loggedIn,setLoggedIn] = useState(false)
+
+    useEffect( () => {
+
+        setLoggedIn(props.loggedIn)
+
+    },[loggedIn])
+
+    useEffect( () => {
+        setUsername("")
+        setPassword("")
+        if (localStorage.getItem("isAuth") === "false")
+            localStorage.setItem("isAuth",false)
+            localStorage.setItem("linkToProfile",false)
+            localStorage.setItem("username",localStorage.getItem("username"))
+            localStorage.setItem("password",localStorage.getItem("password"))
+    },[])
+
+    useEffect(() => {
+        setUsername("")
+        setPassword("")
+        console.log("PROPSSSS")
+        console.log(props)
+    }, [props.count])
+
+    useEffect(() => {
+        setUsername("")
+        setPassword("")
+        console.log("PROPSSSS")
+        console.log(props)
+    }, [props.history.location.state])
+
+    const handleUsername = (event) => {
+        setUsername(event.target.value)
+        localStorage.setItem("linkToProfile",false)
+    }
+    const handlePassword = (event) => {
+        setPassword(event.target.value)
+        localStorage.setItem("linkToProfile",false)
+    }
+    const handlePasswordConfirm = (event) => {
+        setConfirmPassword(event.target.value)
+        setLinkToProfile(false)
+    }
+
+    const handleLogIn = () => {
+        if (username !== "" && password !== "") {
+            setLinkToProfile(true)
+            localStorage.setItem("linkToProfile",true)
         }
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange(event){
-        const {name,value} = event.target;
-        this.setState({
-            [name]:value,
-            linkToProfile:false
-        })
-    }
-
-    handleLogIn = () => {
-        if (this.state.username !== "" && this.state.password !== "") {
-            this.setState({linkToProfile: true})
-        }
-       else if ((this.state.username === "" || this.state.password === "") && this.state.logIn)
+        else if ((username === "" || password === ""))
             window.alert("Please enter all the inputs")
-
-        this.setState({logIn:true,signUp:false})
-
-        console.log("username " + this.state.username)
-        console.log("password " + this.state.password)
-
-    }
-    handleSignUp = () => {
-        if (this.state.username !== "" && this.state.password !== "" && this.state.confirmPassword !== "" && !this.state.linkToProfile)
-            this.setState({linkToProfile:true})
-        else if ((this.state.username === "" || this.state.password === "" || this.state.confirmPassword ==="") && this.state.signUp)
-            window.alert("Please enter all the inputs")
-
-        this.setState({logIn:false,signUp:true})
     }
 
-    render() {
+    const handleSignUp = () => {
+    }
 
-        if (this.state.linkToProfile)
-            return (
-               <div>
-                   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                       <Link to="/"><img src={keyStoreLogoImg} className="keyStoreLogoImg"/></Link>
-                       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-                               aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                           <span className="navbar-toggler-icon"></span>
-                       </button>
+    if (localStorage.getItem("linkToProfile") === "true" || localStorage.getItem("isAuth") === "true")
+        return (
+            <div>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <Link to="/"><img src={keyStoreLogoImg} className="keyStoreLogoImg"/></Link>
 
-                       <div className="collapse navbar-collapse" id="navbarColor02">
-                           <ul className="navbar-nav mr-auto ml-sm-5">
-                               <li className="nav-item active">
-                                   <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-                               </li>
-                               <li className="nav-item">
-                                   <a className="nav-link" href="/profile">Profile</a>
-                               </li>
-                           </ul>
-                           <div className="form-inline my-2 my-lg-0">
-                               {this.state.logIn ?
-                                   <div><input className="form-control mr-sm-2 " type="text" name="username" id="username" placeholder="Username" onChange={this.handleChange} aria-label="Search"/>
-                                       <input className="form-control mr-sm-2" type="password" name="password" id="password" placeholder="Password" onChange={this.handleChange} aria-label="Search"/></div>
-                                   : <div><input className="form-control mr-sm-2 " type="text" name="username" id="username"  placeholder="Username" onChange={this.handleChange} aria-label="Search"/>
-                                       <input className="form-control mr-sm-2" type="password" name="password" id="password" placeholder="Password" onChange={this.handleChange} aria-label="Search"/>
-                                       <input className="form-control mr-sm-2" type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange} aria-label="Search"/></div>}
-                               {this.state.logIn ? <div><button className="btn btn-success my-2 mr-sm-1" type="submit" onClick={this.handleLogIn}>Log In</button>
-                                       <button className="btn btn-outline-success my-2 my-sm-3" type="submit" onClick={this.handleSignUp}>Sign Up</button></div>
-                                   : <div><button className="btn btn-outline-success my-2 mr-sm-1" type="submit" onClick={this.handleLogIn}>Log In</button>
-                                       <button className="btn btn-success my-2 my-sm-3" type="submit" onClick={this.handleSignUp}>Sign Up</button></div>}
-                           </div>
-                       </div>
-                   </nav>
-                   <Redirect to={{
-                       pathname:`users/profile/${this.state.username}`,
-                       state: {
-                           username: this.state.username,
-                           password: this.state.password
-                       }
-                   }}> </Redirect>
-               </div>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+                            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
 
-                )
+                    <div className="collapse navbar-collapse" id="navbarColor02">
+                        <ul className="navbar-nav mr-auto ml-sm-5">
+                            <li className="nav-item active">
+                                <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div><button button type="button" className="btn btn-outline-light btn-sm mr-1" onClick={() => {
+                        localStorage.setItem("isAuth",false)
+                        localStorage.setItem("username","")
+                        localStorage.setItem("password","")
+                        localStorage.setItem("linkToProfile",false)
+                        props.history.push({
+                            pathname:`/`,
+                            state: {
+                                username: "",
+                                password: ""
+                            }
+                        })
+                    }}>Log Out</button></div>
+                    <div><button type="button" className="btn btn-outline-warning" onClick={() => {
+                        props.history.push({
+                            pathname:`/users/profile`,
+                            state: {
+                                username: localStorage.getItem("username"),
+                                password: localStorage.getItem("password"),
+                                keyList: JSON.parse(localStorage.getItem("savedProducts"))
+                            }
+                        })
+                    }}>View profile</button></div>
+                </nav></div>
+
+        )
+
+    else
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -113,21 +135,29 @@ class NavBarComponent extends React.Component{
                             <li className="nav-item active">
                                 <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/profile">Profile</a>
-                            </li>
+
                         </ul>
                         <div className="form-inline my-2 my-lg-0">
-                            {this.state.logIn ?
-                               <div><input className="form-control mr-sm-2 " type="text" name="username" placeholder="Username" onChange={this.handleChange} aria-label="Search"/>
-                                   <PasswordMask id="password" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleChange} useVendorStyles={true} className="form-control mr-sm-2 "/></div>
-                            : <div><input className="form-control mr-sm-2 " type="text" name="username" placeholder="Username" onChange={this.handleChange} aria-label="Search" />
-                                    <PasswordMask id="password" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleChange} useVendorStyles={true} className="form-control mr-sm-2 "/>
-                                    <PasswordMask id="password" name="confirmPassword" placeholder="Confirm password" value={this.state.confirmPassword} onChange={this.handleChange} useVendorStyles={true} className="form-control mr-sm-2 "/></div>}
-                            {this.state.logIn ? <div><button className="btn btn-success my-2 mr-sm-1" type="submit" onClick={this.handleLogIn} onDoubleClick={this.handleSignUp}>Log In</button>
-                            <button className="btn btn-outline-success my-2 my-sm-3" type="submit" onClick={this.handleSignUp}>Sign Up</button></div>
-                            : <div><button className="btn btn-outline-success my-2 mr-sm-1" type="submit" onClick={this.handleLogIn}>Log In</button>
-                                    <button className="btn btn-success my-2 my-sm-3" type="submit" onClick={this.handleSignUp}>Sign Up</button></div>}
+                                <div><input className="form-control mr-sm-2 " type="text" name="username" placeholder="Username" onChange={handleUsername} aria-label="Search"/>
+                                <PasswordMask id="password" name="password" placeholder="Enter password" value={password} onChange={handlePassword} useVendorStyles={true} className="form-control mr-sm-2 "/></div>
+                                <div><button className="btn btn-success my-2 mr-sm-1" type="submit" onClick={() => {
+                                    if ((username === "" || password === "")){
+                                        window.alert("Please enter all the inputs")
+                                    }
+                                    else
+                                        props.history.push({
+                                            pathname:`/users/profile`,
+                                            state: {
+                                                username: username,
+                                                password: password
+                                            }
+                                         })
+                                }} >Log In</button></div>
+                                <div><button className="btn btn-success my-2 mr-sm-1" type="submit" onClick={() => {
+                                    props.history.push({
+                                        pathname:"/users/signUp"
+                                    })
+                                }}>Sign Up</button></div>
                         </div>
                     </div>
                 </nav>
@@ -136,6 +166,5 @@ class NavBarComponent extends React.Component{
 
             </div>
         );
-    }
 }
-export default NavBarComponent
+export default withRouter(NavBarComponent)

@@ -3,7 +3,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 import '../App.css';
-import ProfileComponent from "./ProfileComponent";
+import ProfileComponent from "./login/ProfileComponent";
 import axios from 'axios'
 
 class KeyComponent extends React.Component{
@@ -11,7 +11,15 @@ class KeyComponent extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            added: false
         }
+    }
+
+    componentDidMount() {
+        console.log("PROPSSSSS")
+        console.log(this.props)
+        if (this.props.added)
+            this.setState({added:true})
     }
 
     render() {
@@ -25,15 +33,18 @@ class KeyComponent extends React.Component{
                             <img src={this.props.imageUrl} className="keyImage" alt=""/>
                             <p>Click here for more details...</p></Link>
                             <span className="editAndRemoveBtn">
-                                <Link to={{
-                                    pathname:`/profile`,
-                                    state: {
-                                        name: this.props.name,
-                                        onStock: this.props.onStock,
-                                        imageUrl: this.props.imageUrl,
-                                        useData: true
+                                {!this.state.added ?
+                                <button type="button" className="btn btn-outline-primary" onClick={() => {
+                                    if (localStorage.getItem("isAuth") === "false") {
+                                        window.alert("Please log in!")
                                     }
-                                }}><button type="button" className="btn btn-outline-primary">Add to your products</button></Link></span>
+                                    else
+                                        this.setState({added:true})
+
+                                }}>Add to your products</button>
+                                    : <button type="button" className="btn btn-outline-primary" onClick={() => {
+                                        this.setState({added:false})
+                                    }}>Remove from your products</button>}</span>
                         </div>
                     </div>
                 </div>

@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
+import ReactDOM from 'react-dom'
 import KeyComponent from "./Components/KeyComponent";
-import MainPage from "./Components/MainPageComponent/MainPage"
-import {BrowserRouter as Router, Redirect, Route,Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Redirect, Route,Switch,withRouter} from 'react-router-dom'
 import KeyService from "./Repository/axiosKeyRepository";
 import KeyComponentDetails from "./Components/KeyComponentDetails"
-import ProfileComponent from "./Components/ProfileComponent";
+import ProfileComponent from "./Components/login/ProfileComponent";
 import FilteredByKeys from "./Components/FilterComponent/FilteredByKeys"
-import KeyComponentEdit from "./Components/KeyComponentEdit"
-import FilterCarsComponent from "./Components/FilterComponent/FilterCarsComponent";
-import {Link} from "react-router-dom";
-import axios from "axios";
-import $ from 'jquery'
-import CarService from "./Repository/axiosCarRepository";
+import {BrowserRouter} from "react-router-dom";
+import NavBarComponent from "./Components/MainPageComponent/NavBarComponent";
+import SideBarComponent from "./Components/MainPageComponent/SideBarComponent";
+import SignUpComponent from "./Components/login/signUpComponent";
+import auth from "./Components/login/auth";
+import EditProfileComponent from "./Components/login/EditProfileComponent";
 
 
 class App extends React.Component{
@@ -23,8 +23,16 @@ class App extends React.Component{
             keysApi: [],
             keysApiByCar:[],
             keysApiById: [],
-            isLoading: true
+            isLoading: true,
+            loggedIn: false
         }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+            console.log("prevstatelogin" + prevState.loggedIn)
+            console.log("thisstateloggedin" + this.state.loggedIn)
+            console.log(auth.isAuthenticated())
     }
 
     componentDidMount() {
@@ -34,7 +42,6 @@ class App extends React.Component{
         this.loadKeys();
     }
 
-
     loadKeys = () => {
         KeyService.fetchKeyData().then(response => {
             const keysApi = response.data;
@@ -42,14 +49,19 @@ class App extends React.Component{
         })
     };
 
+    onLogIn(logged) {
+        this.setState({loggedIn:logged})
+    }
+
     render() {
 
         const keysData = this.state.keysApi.map(key => <KeyComponent name={key.name} size={key.size} description={key.description} price={key.price} onStock={key.onStock} imageUrl={key.imageUrl}/>)
 
 
         const routing = (
-            <Router>
-                <MainPage/>
+            <Router basename={window.location.pathname}>
+                <NavBarComponent loggedIn={this.state.loggedIn}/>
+                <SideBarComponent/>
                 <div className="keysData">
                     <Route path={"/keys"} exact render={()=> keysData}>
                 </Route></div>
@@ -63,8 +75,9 @@ class App extends React.Component{
 
                 <div className="keysData">
                     <Route
-                        path={"/users/profile/:username"}
-                        component={ProfileComponent}>
+                        path={"/users/profile"}
+                           render={(props) => <ProfileComponent
+                        {...props} onLogIn={this.onLogIn.bind(this)}/>}>
                     </Route>
                 </div>
 
@@ -72,6 +85,18 @@ class App extends React.Component{
                     <Route
                         path={"/cars/filteredByKeys"}
                         component={FilteredByKeys}>
+                    </Route>
+                </div>
+                <div className="keysData">
+                    <Route
+                        path={"/users/signUp"}
+                        component={SignUpComponent}>
+                    </Route>
+                </div>
+                <div className="keysData">
+                    <Route
+                        path={"/users/editProfile"}
+                        component={EditProfileComponent}>
                     </Route>
                 </div>
             </Router>
@@ -87,4 +112,6 @@ class App extends React.Component{
         )
     }
 }
+const rootElement = document.getElementById("root");
+ReactDOM.render(<BrowserRouter><App/></BrowserRouter>,rootElement)
 export default App
