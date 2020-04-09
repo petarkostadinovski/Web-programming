@@ -66,6 +66,7 @@
 .filterCarsStyle{
   position: relative;
   width: 400px;
+  z-index: 5;
 }
 .signUpStyle{
   position: relative;
@@ -141,4 +142,10 @@
 }
 #profileFont{
     font-size: 20px;
+}
+.car_keychains_image{
+  border: 1px solid #ddd;
+  border-radius: 4%;
+  padding: 5px;
+  width: 450px;
 }

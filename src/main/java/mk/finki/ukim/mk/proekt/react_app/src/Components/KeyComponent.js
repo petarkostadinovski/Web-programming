@@ -65,7 +65,7 @@ class KeyComponent extends React.Component{
                                         }
 
                                         const formParams = qs.stringify(keys);
-                                        if (window.confirm("Change your informations?")) {
+                                        if (window.confirm("Add this product to your products?")) {
                                             this.setState({added: true})
                                             return Axios.patch(`/api/users/${localStorage.getItem("username")}`, formParams, {
                                                 headers: {
@@ -90,15 +90,18 @@ class KeyComponent extends React.Component{
                                         }
 
                                         const formParams = qs.stringify(keys);
-                                        if (window.confirm("Change your informations?")) {
+                                        if (window.confirm("Remove item from your products?")) {
                                             this.setState({added:false})
-                                            return Axios.patch(`/api/users/${localStorage.getItem("username")}`, formParams, {
+                                            return Axios.put(`/api/users/${localStorage.getItem("username")}`, formParams, {
                                                 headers: {
                                                     'Content-Type': 'application/x-www-form-urlencoded'
                                                 }
                                             })
                                                 .then(res => console.log(res))
                                                 .catch(err => console.error(err))
+                                                .then(function () {
+                                                    window.location.reload();
+                                                })
                                         }
                                     }}>Remove from your products</button>}</span>
                         </div>

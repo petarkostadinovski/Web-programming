@@ -26,25 +26,20 @@ class ProfileComponent extends React.Component{
             password: localStorage.getItem("password"),
 
         })
-        this.fetchItemById(this.state.url)
+
+            this.fetchItemById(this.state.url)
     }
+
 
     fetchItemById =  async (url) => {
         const fetchItemById =  await fetch(url+`${this.props.location.state.username}`);
-        console.log(url+`${this.props.match.params.username}`)
         const item = await fetchItemById.json();
-        this.setState({item:item})
-
-        if (!this.state.loggedIn)
-            this.setState({password:this.props.location.state.password})
-            this.setState({username:this.props.location.state.username})
-            this.setState({keysData:this.props.location.state.keyList})
-
-
-        console.log(item)
-        console.log("asdasdasdapasvord")
-        console.log("keys data")
-
+        this.setState({
+            item:item,
+            password:this.props.location.state.password,
+            username:this.props.location.state.username,
+            keysData:this.props.location.state.keyList
+        })
         if (localStorage.getItem("isAuth") === "false") {
             if (item !== null && (this.state.item.password === this.state.password)) {
                 this.setState({loggedIn: true})
@@ -81,7 +76,7 @@ class ProfileComponent extends React.Component{
     render() {
         let data = []
         if (localStorage.getItem("isAuth") === "true")
-            data = JSON.parse(localStorage.getItem("savedProducts")).map(key => <KeyComponent name={key.name}
+            data = JSON.parse(localStorage.getItem("savedProducts")).map(key => <KeyComponent key={key.name} name={key.name}
                                                                                               size={key.size}
                                                                                               description={key.description}
                                                                                               price={key.price}

@@ -6,6 +6,8 @@ import "../../App.css"
 import App from "../../App";
 import KeyService from "../../Repository/axiosKeyRepository";
 import FilterCarsComponent from "../FilterComponent/FilterCarsComponent";
+import Clock from "react-live-clock";
+import ReactFitText from 'react-fittext'
 
 class SideBarComponent extends React.Component{
 
@@ -51,6 +53,15 @@ class SideBarComponent extends React.Component{
                     <nav className="col-md-2 d-none d-md-block bg-light sidebar">
                         <div className="sidebar-sticky">
                             <ul className="nav flex-column">
+                               <div><ReactFitText compressor={0.4}>
+                                    <h1>
+                                        <Clock
+                                            format={'dddd,h:mm:ss A'}
+                                            style={{'fontSize':"20px"}}
+                                            ticking={true}
+                                            timezone={'CET'} />
+                                    </h1>
+                               </ReactFitText></div>
                                 <Link to={this.state.product}><li>
                                     <select className="browser-default custom-select"
                                             value={this.state.product}

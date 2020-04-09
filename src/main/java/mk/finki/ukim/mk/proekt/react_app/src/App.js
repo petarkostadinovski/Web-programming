@@ -13,6 +13,8 @@ import SideBarComponent from "./Components/MainPageComponent/SideBarComponent";
 import SignUpComponent from "./Components/login/signUpComponent";
 import auth from "./Components/login/auth";
 import EditProfileComponent from "./Components/login/EditProfileComponent";
+import MainPageComponent from "./Components/MainPageComponent/MainPageComponent";
+import HomePageComponent from "./Components/MainPageComponent/HomePageComponent";
 
 
 class App extends React.Component{
@@ -59,11 +61,22 @@ class App extends React.Component{
 
         const routing = (
             <Router basename={window.location.pathname}>
-                <NavBarComponent loggedIn={this.state.loggedIn}/>
-                <SideBarComponent/>
+                <MainPageComponent/>
+
                 <div className="keysData">
-                    <Route path={"/keys"} exact render={()=> keysData}>
-                </Route></div>
+                    <Route
+                        path={"/"} exact
+                        component={HomePageComponent}>
+                    </Route>
+                </div>
+
+                <div className="keysData">
+                    <Route
+                        path={"/keys"}
+                        exact
+                        render={()=> keysData}>
+                    </Route>
+                </div>
 
                 <div className="keysData">
                     <Route

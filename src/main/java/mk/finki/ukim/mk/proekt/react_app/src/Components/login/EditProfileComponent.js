@@ -29,7 +29,13 @@ const EditProfileComponent = props => {
 
         if (localStorage.getItem("password") === currentPassword) {
             const data = {
-                password:newPassword
+                password:newPassword,
+                name: "",
+                size: 0,
+                description: "",
+                price: 0,
+                onStock: false,
+                imageUrl:""
             }
             const formParams = qs.stringify(data);
             if (window.confirm("Change your informations?")) {

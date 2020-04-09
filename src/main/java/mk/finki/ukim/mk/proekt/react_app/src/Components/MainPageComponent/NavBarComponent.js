@@ -7,7 +7,6 @@ import keyStoreLogoImg from "../../images/KeyStoreLogo.png"
 import {Link} from "react-router-dom";
 import axios from "axios";
 import PasswordMask from 'react-password-mask';
-import auth from "../login/auth";
 
 const NavBarComponent = props => {
 
@@ -168,10 +167,7 @@ const NavBarComponent = props => {
                         </div>
                     </div>
                 </nav>
-
-
-
             </div>
         );
 }
-export default withRouter(NavBarComponent)
+export default withRouter(NavBarComponent);
