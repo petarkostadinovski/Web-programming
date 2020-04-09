@@ -5,6 +5,7 @@ import '../../App.css';
 import {render} from "react-dom";
 import auth from "./auth";
 import KeyComponent from "../KeyComponent";
+import Axios from "axios";
 
 class ProfileComponent extends React.Component{
 
@@ -19,18 +20,17 @@ class ProfileComponent extends React.Component{
             loggedIn:false
         }
     }
-
     componentDidMount() {
         this.setState({
             username: localStorage.getItem("username"),
             password: localStorage.getItem("password"),
-            keysData: JSON.parse(localStorage.getItem("savedProducts"))
+
         })
         this.fetchItemById(this.state.url)
     }
 
     fetchItemById =  async (url) => {
-        const fetchItemById = await fetch(url+`${this.props.location.state.username}`);
+        const fetchItemById =  await fetch(url+`${this.props.location.state.username}`);
         console.log(url+`${this.props.match.params.username}`)
         const item = await fetchItemById.json();
         this.setState({item:item})
@@ -78,33 +78,41 @@ class ProfileComponent extends React.Component{
             this.props.onLogIn(false) : this.props.onLogIn(true)
     }
 
-    render(){
+    render() {
         let data = []
-    if (localStorage.getItem("isAuth") === "true")
-         data = JSON.parse(localStorage.getItem("savedProducts")).map(key => <KeyComponent name={key.name} size={key.size} description={key.description} price={key.price} onStock={key.onStock} imageUrl={key.imageUrl} added={true}/>)
+        if (localStorage.getItem("isAuth") === "true")
+            data = JSON.parse(localStorage.getItem("savedProducts")).map(key => <KeyComponent name={key.name}
+                                                                                              size={key.size}
+                                                                                              description={key.description}
+                                                                                              price={key.price}
+                                                                                              onStock={key.onStock}
+                                                                                              imageUrl={key.imageUrl}
+                                                                                              added={true}/>)
 
-        return(
-
-        localStorage.getItem("isAuth") === "true" ?
-            <div>
-                <div>
-                    <div id="profileStyle" className="bg-warning text-white">
+            return (
+                localStorage.getItem("isAuth") === "true" ?
+                    <div>
+                        <div>
+                            <div id="profileStyle" className="bg-warning text-white">
                         <span id="profileFont">Hello, <i>{localStorage.getItem("username")}</i>
-                            <button id="btnEdit" className="btn btn-outline-light btn-sm mr-1" onClick={() => {
+                            <button id="btnEdit" className="btn btn-danger btn-sm mr-1" onClick={() => {
                                 this.props.history.push("/users/editProfile")
                             }}>Edit profile</button></span>
-                    </div><br/>
+                            </div>
+                            <br/>
 
-                    <h3><u><i>Your list of products: </i></u></h3><br/>
-                </div>
-                {this.state.keysData < 1 ? <div>
-                    You have not added any products yet.
-                    <button onClick={() => {
-                        this.props.history.push("/keys")
-                    }}>Click here to see available products</button>
-                </div> : data}
-            </div> : null
-        )}
+                            <h3><u><i>Your list of products: </i></u></h3><br/>
+                        </div>
+                        {this.state.keysData.length < 1 || localStorage.getItem("savedProducts") === '' ? <div>
+                            You have not added any products yet.
+                            <button onClick={() => {
+                                this.props.history.push("/keys")
+                            }}>Click here to see available products</button>
+                        </div> : data}
+                    </div> : null
+            )
+
+    }
 
 }
 export default withRouter(ProfileComponent)

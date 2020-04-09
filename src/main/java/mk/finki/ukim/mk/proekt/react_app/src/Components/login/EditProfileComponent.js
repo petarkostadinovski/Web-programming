@@ -1,20 +1,25 @@
 import React from "react";
 import { withRouter } from 'react-router-dom'
 import PasswordMask from 'react-password-mask';
-import axios from "axios";
+import Axios from "../../custom-axios/axios";
 import { useState, useEffect } from 'react';
+import qs from 'qs'
 
 
 const EditProfileComponent = props => {
 
     const [username,setUsername] = useState("")
-    const [password,setPassword] = useState("")
+    const [currentPassword,setCurrentPassword] = useState("")
+    const [newPassword,setNewPassword] = useState("")
 
     const handleUsername = (event) => {
         setUsername(event.target.value)
     }
-    const handlePassword = (event) => {
-        setPassword(event.target.value)
+    const handleCurrentPassword = (event) => {
+        setCurrentPassword(event.target.value)
+    }
+    const handleNewPassword = (event) => {
+        setNewPassword(event.target.value)
     }
 
     const handleSubmit = async event => {
@@ -22,26 +27,26 @@ const EditProfileComponent = props => {
         const fetchItemById = await fetch(`/api/users/${username}`);
         const item = await fetchItemById.json();
 
-        if (item !== null)
-            window.alert("Username already exists")
-
-        else {
-            return axios.post('/api/users', {
-                username: username,
-                password: password,
-                keyList: []
-            }).then(function () {
-                if (!window.alert("Successfuly signed up"))
-                    props.history.push("/")
-            }).then(function (response) {
-                console.log(response);
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
+        if (localStorage.getItem("password") === currentPassword) {
+            const data = {
+                password:newPassword
+            }
+            const formParams = qs.stringify(data);
+            if (window.confirm("Change your informations?")) {
+                props.history.push("/")
+                return Axios.patch(`/api/users/${localStorage.getItem("username")}`, formParams, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(res => console.log(res))
+                    .catch(err => console.error(err))
+            }
+        } else {
+            window.alert("Passwords does not match!")
         }
-    }
 
+    }
     return(
         <div >
             {localStorage.getItem("showSignUp") === "true" ?
@@ -50,10 +55,12 @@ const EditProfileComponent = props => {
 
 
                     <input type="text" placeholder="New username" onChange={handleUsername}/><br/>
-                    <PasswordMask type="text" placeholder="Current password" onChange={handlePassword} useVendorStyles={true}/><br/>
-                    <PasswordMask type="text" placeholder="New password" onChange={handlePassword} useVendorStyles={true}/><br/>
+                    <PasswordMask type="text" placeholder="New password" onChange={handleNewPassword} useVendorStyles={true}/><br/>
 
-                    <div><button className="btnSignUp" onClick={handleSubmit}>Confirm</button></div>
+                    <div>
+                        <PasswordMask type="text" placeholder="Type the current password to confirm" onChange={handleCurrentPassword} useVendorStyles={true}/><br/>
+                        <button className="btnSignUp" onClick={handleSubmit}>Confirm</button>
+                    </div>
                 </div>
                 : null }
         </div>

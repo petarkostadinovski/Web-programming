@@ -98,6 +98,7 @@ const NavBarComponent = props => {
                         localStorage.setItem("username","")
                         localStorage.setItem("password","")
                         localStorage.setItem("linkToProfile",false)
+                        localStorage.setItem("savedProducts","")
                         props.history.push({
                             pathname:`/`,
                             state: {
@@ -106,7 +107,12 @@ const NavBarComponent = props => {
                             }
                         })
                     }}>Log Out</button></div>
-                    <div><button type="button" className="btn btn-outline-warning" onClick={() => {
+                    <div><button type="button" className="btn btn-outline-warning" onClick={async () => {
+
+                        const fetchItemById =  await fetch(`/api/users/${localStorage.getItem("username")}`);
+                        const item = await fetchItemById.json();
+                        localStorage.setItem("savedProducts",JSON.stringify(item.keyList))
+
                         props.history.push({
                             pathname:`/users/profile`,
                             state: {
@@ -115,7 +121,8 @@ const NavBarComponent = props => {
                                 keyList: JSON.parse(localStorage.getItem("savedProducts"))
                             }
                         })
-                    }}>View profile</button></div>
+                    }}>View profile</button>
+                    </div>
                 </nav></div>
 
         )

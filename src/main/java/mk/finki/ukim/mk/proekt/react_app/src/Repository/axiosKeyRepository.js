@@ -3,7 +3,7 @@ import axios from "axios";
 const KeyService = {
 
     fetchKeyData: () => {
-        return axios.get("api/keys");
+        return axios.get("/api/keys");
     },
 
     deleteKey: (name) => {

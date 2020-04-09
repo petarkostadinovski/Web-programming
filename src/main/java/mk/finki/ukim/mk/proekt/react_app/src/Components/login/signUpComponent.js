@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter } from 'react-router-dom'
 import PasswordMask from 'react-password-mask';
-import axios from "axios";
+import Axios from "../../custom-axios/axios";
 import { useState, useEffect } from 'react';
-
 
 const SignUpComponent = props => {
 
@@ -26,7 +25,7 @@ const SignUpComponent = props => {
             window.alert("Username already exists")
 
         else {
-            return axios.post('/api/users', {
+            return Axios.post('/api/users', {
                 username: username,
                 password: password,
                 keyList: []

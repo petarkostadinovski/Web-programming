@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ReactDOM from 'react-dom'
 import KeyComponent from "./Components/KeyComponent";
-import {BrowserRouter as Router, Redirect, Route,Switch,withRouter} from 'react-router-dom'
+import {BrowserRouter as Router, HashRouter, MemoryRouter, Route,Switch,withRouter} from 'react-router-dom'
 import KeyService from "./Repository/axiosKeyRepository";
 import KeyComponentDetails from "./Components/KeyComponentDetails"
 import ProfileComponent from "./Components/login/ProfileComponent";
@@ -55,8 +55,7 @@ class App extends React.Component{
 
     render() {
 
-        const keysData = this.state.keysApi.map(key => <KeyComponent name={key.name} size={key.size} description={key.description} price={key.price} onStock={key.onStock} imageUrl={key.imageUrl}/>)
-
+        const keysData = this.state.keysApi.map(key => <KeyComponent key={key.id} name={key.name} size={key.size} description={key.description} price={key.price} onStock={key.onStock} imageUrl={key.imageUrl}/>)
 
         const routing = (
             <Router basename={window.location.pathname}>
