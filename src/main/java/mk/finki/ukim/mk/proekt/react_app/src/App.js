@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ReactDOM from 'react-dom'
 import KeyComponent from "./Components/KeyComponent";
-import {BrowserRouter as Router, HashRouter, MemoryRouter, Route,Switch,withRouter} from 'react-router-dom'
+import {BrowserRouter as Router, HashRouter, Link, MemoryRouter, Route, Switch, withRouter} from 'react-router-dom'
 import KeyService from "./Repository/axiosKeyRepository";
 import KeyComponentDetails from "./Components/KeyComponentDetails"
 import ProfileComponent from "./Components/login/ProfileComponent";
@@ -15,6 +15,11 @@ import auth from "./Components/login/auth";
 import EditProfileComponent from "./Components/login/EditProfileComponent";
 import MainPageComponent from "./Components/MainPageComponent/MainPageComponent";
 import HomePageComponent from "./Components/MainPageComponent/HomePageComponent";
+import car_keys_image from "./images/car_keys_image.jfif";
+import car_keychains_image from "./images/car_keychains_image.jpg";
+import KeychainService from "./Repository/axiosKeychainRepository";
+import KeyChainComponent from "./Components/KeyChainComponent";
+import KeychainComponentDetails from "./Components/KeychainComponentDetails";
 
 
 class App extends React.Component{
@@ -23,25 +28,22 @@ class App extends React.Component{
         super();
         this.state = {
             keysApi: [],
+            keychainsApi: [],
             keysApiByCar:[],
             keysApiById: [],
             isLoading: true,
-            loggedIn: false
+            loggedIn: false,
+            reloadKeys: false
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-
-            console.log("prevstatelogin" + prevState.loggedIn)
-            console.log("thisstateloggedin" + this.state.loggedIn)
-            console.log(auth.isAuthenticated())
-    }
 
     componentDidMount() {
         this.setState({
             isLoading: true
         });
         this.loadKeys();
+        this.loadKeychains();
     }
 
     loadKeys = () => {
@@ -50,6 +52,14 @@ class App extends React.Component{
             this.setState({keysApi,isLoading:false})
         })
     };
+    loadKeychains = () => {
+        KeychainService.fetchKeychainData().then(response => {
+            const keychainsApi = response.data;
+            this.setState({keychainsApi,isLoading:false})
+        })
+    };
+
+
 
     onLogIn(logged) {
         this.setState({loggedIn:logged})
@@ -58,9 +68,9 @@ class App extends React.Component{
     render() {
 
         const keysData = this.state.keysApi.map(key => <KeyComponent key={key.id} name={key.name} size={key.size} description={key.description} price={key.price} onStock={key.onStock} imageUrl={key.imageUrl}/>)
-
+        const keychainsData = this.state.keychainsApi.map(keychain => <KeyChainComponent key={keychain.id} name={keychain.name} size={keychain.size} description={keychain.description} price={keychain.price} onStock={keychain.onStock} imageUrl={keychain.imageUrl}/>)
         const routing = (
-            <Router basename={window.location.pathname}>
+            <Router>
                 <MainPageComponent/>
 
                 <div className="keysData">
@@ -74,14 +84,38 @@ class App extends React.Component{
                     <Route
                         path={"/keys"}
                         exact
-                        render={()=> keysData}>
+                        render={()=> <div><div className="rightSidebar" style={{"marginTop":"1px"}}>
+                            <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
+                                <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                            </table>
+                        </div>{keysData}</div>}>
                     </Route>
                 </div>
 
                 <div className="keysData">
                     <Route
+                        path={"/keychains"}
+                        exact
+                        render={()=> <div><div className="rightSidebar" style={{"marginTop":"1px"}}>
+                            <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
+                                <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keys</span></th><tr><Link to="/keys"><img src={car_keys_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                            </table>
+                        </div>{keychainsData}</div>}>
+                    </Route>
+                </div>
+
+
+                <div className="keysData">
+                    <Route
                         path={"/keys/:name"}
                         component={KeyComponentDetails}>
+                    </Route>
+                </div>
+
+                <div className="keysData">
+                    <Route
+                        path={"/keychains/:name"}
+                        component={KeychainComponentDetails}>
                     </Route>
                 </div>
 
@@ -119,7 +153,6 @@ class App extends React.Component{
                 <div>
                     {routing}
                 </div>
-
             </div>
         )
     }

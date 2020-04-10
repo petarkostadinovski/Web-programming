@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom'
-import {BrowserRouter as Router, Redirect, Route,Switch} from 'react-router-dom'
+import {BrowserRouter as Router, withRouter, Redirect, Route,Switch} from 'react-router-dom'
 import $ from 'jquery'
 import "../../App.css"
 import App from "../../App";
@@ -26,6 +26,8 @@ class SideBarComponent extends React.Component{
         this.setState({
             [name]:value
         })
+        if (value !== 'Select')
+            this.props.history.push(`${value}`)
     }
 
     toggleFilterCarsModal = () => {
@@ -62,17 +64,17 @@ class SideBarComponent extends React.Component{
                                             timezone={'CET'} />
                                     </h1>
                                </ReactFitText></div>
-                                <Link to={this.state.product}><li>
+                                <li>
                                     <select className="browser-default custom-select"
                                             value={this.state.product}
                                             onChange={this.handleChange}
                                             name="product"
                                     >
-                                        <option selected>Products</option>
+                                        <option value="/">Select products</option>
                                         <option value="/keys">Keys</option>
-                                        <option value="/keyrings">Keyrings</option>
+                                        <option value="/keychains">Keychains</option>
                                     </select>
-                                </li></Link>
+                                </li>
 
                             </ul>
                         </div>
@@ -99,9 +101,10 @@ class SideBarComponent extends React.Component{
                 <div className="aaa" id="aa">
                     <FilterCarsComponent showModal={this.state.filterCarsModal} rendered="rendered"/>
                 </div>
+
             </div>
         )
     }
 }
 
-export default SideBarComponent
+export default withRouter(SideBarComponent)

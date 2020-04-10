@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Redirect, Route,Switch,withRouter} from 'react-
 import "../../App.css"
 import NavBarComponent from "./NavBarComponent";
 import SideBarComponent from "./SideBarComponent";
+import FooterComponent from "./FooterComponent";
 
 
 const MainPageComponent = props => {
@@ -10,6 +11,7 @@ const MainPageComponent = props => {
         <div>
             <NavBarComponent/>
             <SideBarComponent/>
+            <FooterComponent/>
         </div>
     )
 }

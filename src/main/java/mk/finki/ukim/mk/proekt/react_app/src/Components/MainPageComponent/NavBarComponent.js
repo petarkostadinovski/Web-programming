@@ -5,8 +5,15 @@ import "../../App.css"
 import userProfileImage from "../../images/userProfileImage.png"
 import keyStoreLogoImg from "../../images/KeyStoreLogo.png"
 import {Link} from "react-router-dom";
-import axios from "axios";
+import TextTransition, { presets } from "react-text-transition";
 import PasswordMask from 'react-password-mask';
+
+const TEXTS = [
+    "Forest",
+    "Building",
+    "Tree",
+    "Color"
+];
 
 const NavBarComponent = props => {
 
@@ -77,7 +84,7 @@ const NavBarComponent = props => {
     if (localStorage.getItem("linkToProfile") === "true" || localStorage.getItem("isAuth") === "true")
         return (
             <div>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav className="navbar navbar-expand-lg navbar-dark" style={{"backgroundColor" : "#002233"}}>
                     <Link to="/"><img src={keyStoreLogoImg} className="keyStoreLogoImg"/></Link>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
@@ -87,8 +94,8 @@ const NavBarComponent = props => {
 
                     <div className="collapse navbar-collapse" id="navbarColor02">
                         <ul className="navbar-nav mr-auto ml-sm-5">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+                            <li className={"homeTextStyle"}>
+                                <a href="/" style={{"color":"white"}}>Home</a>
                             </li>
                         </ul>
                     </div>
@@ -98,6 +105,7 @@ const NavBarComponent = props => {
                         localStorage.setItem("password","")
                         localStorage.setItem("linkToProfile",false)
                         localStorage.setItem("savedProducts","")
+                        localStorage.setItem("loggedOut","true")
                         props.history.push({
                             pathname:`/`,
                             state: {
@@ -129,7 +137,7 @@ const NavBarComponent = props => {
     else
         return (
             <div>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav className="navbar navbar-expand-lg " style={{"backgroundColor" : "#002233"}}>
                     <Link to="/"><img src={keyStoreLogoImg} className="keyStoreLogoImg"/></Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,15 +146,16 @@ const NavBarComponent = props => {
 
                     <div className="collapse navbar-collapse" id="navbarColor02">
                         <ul className="navbar-nav mr-auto ml-sm-5">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-                            </li>
+                           <li className={"homeTextStyle"}>
+                                <a href="/" style={{"color":"white"}}>Home</a>
+                           </li>
 
                         </ul>
                         <div className="form-inline my-2 my-lg-0">
                                 <div><input className="form-control mr-sm-2 " type="text" name="username" placeholder="Username" onChange={handleUsername} aria-label="Search"/>
                                 <PasswordMask id="password" name="password" placeholder="Enter password" value={password} onChange={handlePassword} useVendorStyles={true} className="form-control mr-sm-2 "/></div>
                                 <div><button className="btn btn-success my-2 mr-sm-1" type="submit" onClick={() => {
+                                    localStorage.setItem("loggedOut","false")
                                     if ((username === "" || password === "")){
                                         window.alert("Please enter all the inputs")
                                     }

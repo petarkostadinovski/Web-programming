@@ -149,3 +149,32 @@
   padding: 5px;
   width: 450px;
 }
+.car_keys{
+  border: 1px solid #ddd;
+  border-radius: 4%;
+  padding: 5px;
+  width: 450px;
+  height: 290px;
+}
+.car_keychains_image_side{
+  border: 1px solid #ddd;
+  border-radius: 4%;
+  padding: 5px;
+  width: 350px;
+  height: 230px;
+}
+.car_keys_side{
+  border: 1px solid #ddd;
+  border-radius: 4%;
+  padding: 5px;
+  width: 350px;
+  height: 220px;
+}
+.rightSidebar{
+  padding: 6px 8px 6px 16px;
+  height: 100%;
+  position: fixed;
+  margin-left: 840px;
+  margin-top:-170px;
+
+}
