@@ -65,6 +65,7 @@ class KeyComponent extends React.Component{
                                         const data = [...new Array(JSON.parse(localStorage.getItem("savedProducts")))];
 
                                         const keys = {
+                                            username:localStorage.getItem("username"),
                                             password:localStorage.getItem("password"),
                                             name: this.props.name,
                                             size: this.props.size,
@@ -90,6 +91,7 @@ class KeyComponent extends React.Component{
                                 }}>Add to your products</button>
                                     : <button type="button" className="btn btn-outline-primary" onClick={() => {
                                         const keys = {
+                                            username:localStorage.getItem("username"),
                                             password:localStorage.getItem("password"),
                                             name: this.props.name,
                                             size: this.props.size,

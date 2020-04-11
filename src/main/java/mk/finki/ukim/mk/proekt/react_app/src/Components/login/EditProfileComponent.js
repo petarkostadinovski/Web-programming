@@ -29,6 +29,7 @@ const EditProfileComponent = props => {
 
         if (localStorage.getItem("password") === currentPassword) {
             const data = {
+                username:username,
                 password:newPassword,
                 name: "",
                 size: 0,

@@ -34,53 +34,63 @@ class ProfileComponent extends React.Component{
 
     fetchItemById =  async (url) => {
         let fetchItemById
+        console.log(this.props.location.state.username)
         if (localStorage.getItem("isAuth" === "true"))
             fetchItemById =  await fetch(url+`${localStorage.getItem("username")}`);
         else
             fetchItemById =  await fetch(url+`${this.props.location.state.username}`);
 
         const item = await fetchItemById.json();
-        if (localStorage.getItem("isAuth" === "true"))
-            this.setState({keysData:JSON.parse(localStorage.getItem("savedProducts"))})
-        else
-            this.setState({keysData: item.keyList})
+        console.log("ITEMMMMMMMMMMM")
+        console.log(item)
+        if (item === null){
+            if (!window.alert("Wrong username or password, please try again."))
+                this.props.history.push("/")
+        }else {
 
-        this.setState({
-            item:item,
-            password:this.props.location.state.password,
-            username:this.props.location.state.username,
-        })
-        if (localStorage.getItem("isAuth") === "false") {
-            if (item !== null && (this.state.item.password === this.state.password)) {
-                this.setState({loggedIn: true})
+
+            if (localStorage.getItem("isAuth" === "true"))
+                this.setState({keysData: JSON.parse(localStorage.getItem("savedProducts"))})
+            else
                 this.setState({keysData: item.keyList})
-                localStorage.setItem("username", this.state.username)
-                localStorage.setItem("password", this.state.password)
-                localStorage.setItem("savedProducts",JSON.stringify(item.keyList))
-                localStorage.setItem("isAuth", true)
-                localStorage.setItem("linkToProfile", true)
 
-                auth.login()
-            } else {
-                this.setState({loggedIn: false})
-                auth.logout()
-                localStorage.setItem("username", "")
-                localStorage.setItem("password", "")
-                localStorage.setItem("isAuth", false)
-                localStorage.setItem("linkToProfile", false)
+            this.setState({
+                item: item,
+                password: this.props.location.state.password,
+                username: this.props.location.state.username,
+            })
+            if (localStorage.getItem("isAuth") === "false") {
+                if (item !== null && (this.state.item.password === this.state.password)) {
+                    this.setState({loggedIn: true})
+                    this.setState({keysData: item.keyList})
+                    localStorage.setItem("username", this.state.username)
+                    localStorage.setItem("password", this.state.password)
+                    localStorage.setItem("savedProducts", JSON.stringify(item.keyList))
+                    localStorage.setItem("isAuth", true)
+                    localStorage.setItem("linkToProfile", true)
 
-                if (!window.alert("Wrong username or password, please try again."))
-                    this.props.history.push({
-                        pathname: `/`,
-                        state: {
-                            username: "",
-                            password: ""
-                        }
-                    })
+                    auth.login()
+                } else {
+                    this.setState({loggedIn: false})
+                    auth.logout()
+                    localStorage.setItem("username", "")
+                    localStorage.setItem("password", "")
+                    localStorage.setItem("isAuth", false)
+                    localStorage.setItem("linkToProfile", false)
+
+                    if (!window.alert("Wrong username or password, please try again."))
+                        this.props.history.push({
+                            pathname: `/`,
+                            state: {
+                                username: "",
+                                password: ""
+                            }
+                        })
+                }
             }
+            this.state.item === null || this.state.password !== this.state.item.password ?
+                this.props.onLogIn(false) : this.props.onLogIn(true)
         }
-        this.state.item === null || this.state.password !== this.state.item.password ?
-            this.props.onLogIn(false) : this.props.onLogIn(true)
     }
 
     render() {
