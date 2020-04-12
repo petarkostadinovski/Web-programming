@@ -98,7 +98,7 @@ class FilterCarsComponent extends React.Component{
 
                                     </select>
 
-                                    <span>Select model(test):</span>
+                                    <span>Select model:</span>
                                     <select className="browser-default custom-select"
                                             name="carModel"
                                             onChange={this.handleChange}
