@@ -45,41 +45,41 @@ public class DataHolder {
     @PostConstruct
     public void init(){
 
-        final Car AudiA32004= new Car("2341","Audi","A3",2004);
-        final Car MercedesC220 = new Car("1151","Mercedes","C220",2010);
-        final Car MercedesC220_1 = new Car("12345","Mercedes","C220",2012);
-        final Car MercedesC200 = new Car("1121","Mercedes","C200",2015);
-
-        final Users user = new Users("petar","p123");
-
-        Key k = new Key("AudiA3_2004",13,"u5d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004);
-        keyList.add(k);
-        keyList.add(new Key("benz2",15,"u1d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220));
-        keyList.add(new Key("benz3",15,"u1d description ...",100,false,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220));
-        keyList.add(new Key("bbbbbbbbbb",15,"u1d description ...",100,false,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220_1));
-        keyList.add(new Key("AudiA3_2004_1",17,"sf6 description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004));
-        keyList.add(new Key("BENZC220_2010",15,"m3f description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", MercedesC220));
-
-        KeyChain keyChain1 = new KeyChain("u5dChain","description chain", 50, true, "https://s.yimg.com/aah/yhst-54572186103590/ford-lincoln-key-fob-smart-remote-silicone-rubber-cover-20.jpg");
-
-        keyChainList.add(keyChain1);
-
-        carList.add(AudiA32004);
-        carList.add(MercedesC220);
-        carList.add(MercedesC220_1);
-        carList.add(MercedesC200);
-
-        user.setKeyList(keyList);
-        usersList.add(user);
-
-        user.setKeyChainList(keyChainList);
-
-        if(this.carRepository.count() == 0) {
-            this.carRepository.saveAll(carList);
-            this.keyRepository.saveAll(keyList);
-            this.keyChainRepository.saveAll(keyChainList);
-            this.usersRepository.saveAll(usersList);
-        }
+//        final Car AudiA32004= new Car("2341","Audi","A3",2004);
+//        final Car MercedesC220 = new Car("1151","Mercedes","C220",2010);
+//        final Car MercedesC220_1 = new Car("12345","Mercedes","C220",2012);
+//        final Car MercedesC200 = new Car("1121","Mercedes","C200",2015);
+//
+//        final Users user = new Users("petar","p123");
+//
+//        Key k = new Key("AudiA3_2004",13,"u5d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004);
+//        keyList.add(k);
+//        keyList.add(new Key("benz2",15,"u1d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220));
+//        keyList.add(new Key("benz3",15,"u1d description ...",100,false,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220));
+//        keyList.add(new Key("bbbbbbbbbb",15,"u1d description ...",100,false,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg",MercedesC220_1));
+//        keyList.add(new Key("AudiA3_2004_1",17,"sf6 description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004));
+//        keyList.add(new Key("BENZC220_2010",15,"m3f description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", MercedesC220));
+//
+//        KeyChain keyChain1 = new KeyChain("u5dChain","description chain", 50, true, "https://s.yimg.com/aah/yhst-54572186103590/ford-lincoln-key-fob-smart-remote-silicone-rubber-cover-20.jpg");
+//
+//        keyChainList.add(keyChain1);
+//
+//        carList.add(AudiA32004);
+//        carList.add(MercedesC220);
+//        carList.add(MercedesC220_1);
+//        carList.add(MercedesC200);
+//
+//        user.setKeyList(keyList);
+//        usersList.add(user);
+//
+//        user.setKeyChainList(keyChainList);
+//
+//        if(this.carRepository.count() == 0) {
+//            this.carRepository.saveAll(carList);
+//            this.keyRepository.saveAll(keyList);
+//            this.keyChainRepository.saveAll(keyChainList);
+//            this.usersRepository.saveAll(usersList);
+//        }
     }
 
 }

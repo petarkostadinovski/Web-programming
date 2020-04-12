@@ -44,11 +44,13 @@ class ProfileComponent extends React.Component{
             fetchItemById =  await fetch(url+`${this.props.location.state.username}`);
 
         const item = await fetchItemById.json();
-        console.log("ITEMMMMMMMMMMM")
-        console.log(item)
+
         if (item === null){
-            if (!window.alert("Wrong username or password, please try again."))
+            if (!window.alert("Wrong username or password, please try again.")) {
+                document.getElementById("username").value = ""
+                document.getElementById("password").value = ""
                 this.props.history.push("/")
+            }
         }else {
 
 
@@ -89,14 +91,16 @@ class ProfileComponent extends React.Component{
                     localStorage.setItem("isAuth", false)
                     localStorage.setItem("linkToProfile", false)
 
-                    if (!window.alert("Wrong username or password, please try again."))
+                    if (!window.alert("Wrong username or password, please try again.")){
+                        document.getElementById("username").value = ""
+                        document.getElementById("password").value = ""
                         this.props.history.push({
                             pathname: `/`,
                             state: {
                                 username: "",
                                 password: ""
                             }
-                        })
+                        })}
                 }
             }
             this.state.item === null || this.state.password !== this.state.item.password ?
