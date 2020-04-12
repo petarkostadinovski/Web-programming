@@ -50,7 +50,7 @@ public class DataHolder {
 //        final Car MercedesC220_1 = new Car("12345","Mercedes","C220",2012);
 //        final Car MercedesC200 = new Car("1121","Mercedes","C200",2015);
 //
-//        final Users user = new Users("petar","p123");
+//        //final Users user = new Users("petar","p123");
 //
 //        Key k = new Key("AudiA3_2004",13,"u5d description ...",100,true,"https://s.yimg.com/aah/yhst-54572186103590/2010-bmw-5-series-remote-keyless-entry-key-5.jpg", AudiA32004);
 //        keyList.add(k);
@@ -68,7 +68,7 @@ public class DataHolder {
 //        carList.add(MercedesC220);
 //        carList.add(MercedesC220_1);
 //        carList.add(MercedesC200);
-//
+
 //        user.setKeyList(keyList);
 //        usersList.add(user);
 //

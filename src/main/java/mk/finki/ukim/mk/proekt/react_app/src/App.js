@@ -8,8 +8,6 @@ import KeyComponentDetails from "./Components/KeyComponentDetails"
 import ProfileComponent from "./Components/login/ProfileComponent";
 import FilteredByKeys from "./Components/FilterComponent/FilteredByKeys"
 import {BrowserRouter} from "react-router-dom";
-import NavBarComponent from "./Components/MainPageComponent/NavBarComponent";
-import SideBarComponent from "./Components/MainPageComponent/SideBarComponent";
 import SignUpComponent from "./Components/login/signUpComponent";
 import PaginacionTabla from "./Components/Pagination";
 import EditProfileComponent from "./Components/login/EditProfileComponent";
@@ -87,7 +85,7 @@ class App extends React.Component{
                         exact
                         render={()=> <div><div className="rightSidebar" style={{"marginTop":"1px"}}>
                             <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
-                                <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keychains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
                             </table>
                         </div>
 
@@ -152,7 +150,7 @@ class App extends React.Component{
                                                 <div className="rightSidebar" style={{"marginTop":"1px"}}>
                                                     <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
                                                         <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keys</span></th><tr><Link to="/keys"><img src={car_keys_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
-                                                        <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                                        <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keychains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
                                                     </table>
                                                 </div>
                                                         <h3 style={{"marginLeft":"10px","position":"relative","top":"-50px", "color":"darkgray"}}>Filtered keys by car informations</h3>
@@ -171,7 +169,7 @@ class App extends React.Component{
                             <div className="rightSidebar" style={{"marginTop":"1px"}}>
                                 <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
                                     <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keys</span></th><tr><Link to="/keys"><img src={car_keys_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
-                                    <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                    <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keychains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
                                 </table>
                             </div>
                             <h3 style={{"marginLeft":"60px","position":"relative","top":"-50px", "color":"darkgray"}}>Filtered keys by car brand</h3>

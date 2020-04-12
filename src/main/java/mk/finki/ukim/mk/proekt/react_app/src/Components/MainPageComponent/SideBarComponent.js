@@ -38,12 +38,15 @@ class SideBarComponent extends React.Component{
     }
 
     handleClick = () => {
-        this.props.history.push({
-            pathname:`/cars/keysByCarBrand`,
-            state: {
-                searchedBrand: this.state.searchValue
-            }
-        })
+        if (this.state.searchValue === "")
+            window.alert("Searched value is empty")
+        else{
+            this.props.history.push({
+                pathname:`/cars/keysByCarBrand`,
+                state: {
+                    searchedBrand: this.state.searchValue
+                }
+        })}
     }
 
     toggleFilterCarsModal = () => {
@@ -104,7 +107,7 @@ class SideBarComponent extends React.Component{
                                 <div>
                                     <button className="btn btn-info" type="submit" onClick={this.toggleFilterCarsModal}>Filter Cars</button>
                                     <div className="btn-group mr-2">
-                                        <input className="form-control mr-sm-2 " name="searchValue" type="text" placeholder="Search" onChange={this.handleSearch}
+                                        <input className="form-control mr-sm-2 " name="searchValue" type="text" placeholder="Search by brand" onChange={this.handleSearch}
                                                aria-label="Search"/>
                                     </div>
                                     <button type="button" className="btn btn-secondary" name="searchValue" onClick={this.handleClick}>Search</button>

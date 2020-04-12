@@ -1,0 +1,61 @@
+INSERT INTO key_chain (name, description, image_url, on_stock,price)
+VALUES
+	('u42e', 'u42e description...', 'https://www.superfunstuff.co.uk/ekmps/shops/superfunstuffc/images/metal-earth-globe-keyring-1-inch-18561-p.jpg', true, 150),
+	('kj32', 'kj32 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT34SP9w3PDf-xzbemS32tSW2fgCfizwDORPUmbadjWAuZZzsxL&usqp=CAU', true, 50),
+	('uds3', 'uds3 description...', 'https://images-na.ssl-images-amazon.com/images/I/71cJ6IHXrpL._SL1500_.jpg', true, 200),
+	('ah70', 'ah70 description...', 'https://images-na.ssl-images-amazon.com/images/I/61ogo9LuD0L._SY355_.jpg', false, 150),
+	('k3l2', 'k3l2 description...', 'https://images-na.ssl-images-amazon.com/images/I/61pGOuiqmGL._SL1000_.jpg', true, 50),
+	('erd3', 'erd3 description...', 'https://i.ebayimg.com/images/g/nLsAAOSwmgJY4lQP/s-l300.jpg', true, 150),
+	('5af3', '5af3 description...', 'https://cdn.pricearchive.org/images/aliexpress.com/32960392704/Car-Keychains-Auto-Metal-Key-chain-Key-Ring-For-BMW-3-5-7-Series-X1-X3.jpg', false, 50),
+	('us25', 'us25 description...', 'https://promo10.com.au/media/product/99a/spinning-metal-keyrings-84f.jpg', true, 200),
+	('us37', 'us37 description...', 'https://i.ebayimg.com/images/g/XvEAAOSwgIRcnuK9/s-l400.jpg', true, 150),
+	('av40', 'av40 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTqW3vcSDlrcOyeMIVVcu5OMfP1atJRnEJqpjtL3zTXOrK8gZZt&usqp=CAU', false, 50),
+	('pv20', 'pv20 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSpOG8g5OYgzH9GFAzrf2X1CqnDip6FIoaJENbLnU0ha5U7QU7I&usqp=CAU', true, 150),
+	('we3f', 'we3f description...', 'https://i5.walmartimages.com/asr/45bd1f95-4011-4972-9c0a-9b8def269cd5_1.5e60051d56580a33db28c0f7b77ac21a.jpeg?odnWidth=450&odnHeight=450&odnBg=ffffff', true, 200),
+	('tfd3', 'tfd3 description...', 'https://cdn.shopify.com/s/files/1/2423/8983/products/product-image-683246123_1024x1024.jpg?v=1571710048', true, 2500),
+	('ytf3', 'ytf3 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTYeVbXd6mZiBbW0d-k3QeAMnHPLStWiuSYIhuGYBMxPyWrMLr2&usqp=CAU', false, 200),
+	('ff7l', 'ff7l description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRx5t-asGcv9SdFvYr2bn2VoNx-RoynlnXar4LUNKBRtqb83hdl&usqp=CAU', true, 200),
+	('f773', 'f773 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQO62yckWMDDHMppLDJ4cdJUwwL_NVDj5MGj8-vkZqVyzdCUzeX&usqp=CAU', false, 150),
+	('g35r', 'g35r description...', 'https://i.ebayimg.com/images/g/Lp8AAOSwjedcjm8D/s-l300.jpg', true, 50),
+	('ll3g', 'll3g description...', 'https://i.pinimg.com/736x/f8/91/1d/f8911d2bc09aa86f366862377fadcd4b.jpg', false, 300),
+	('ll3h', 'll3h description...', 'https://i.pinimg.com/736x/f8/91/1d/f8911d2bc09aa86f366862377fadcd4b.jpg', true, 150),
+	('5d2a', '5d2a description...', 'https://images.homedepot-static.com/productImages/433b94a9-77d8-4d8e-9afc-d74e67318ddc/svn/nite-ize-key-accessories-krg-03-11-64_1000.jpg', true, 300),
+	('5d2b', '5d2b description...', 'https://images.homedepot-static.com/productImages/e750e246-ddcb-4e55-bc70-3ef975cd1ced/svn/hillman-key-accessories-713188-64_1000.jpg', true, 150),
+	('57ag', '57ag description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTvuiqR0pm-uvN4Y6OJjvVNw9BvG2tNKhjTEMVYhjiUU76EW4l8&usqp=CAU', true, 150),
+	('ag30', 'ag30 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSk_WxxT8Bp9YTk7-guHnOkx4ZlNajEUOJ9C8MEMlmO8PER8Gu-&usqp=CAU', true, 300),
+	('pp3q', 'pp3q description...', 'https://images-na.ssl-images-amazon.com/images/I/710%2ByOEyvdL._SX425_.jpg', false, 300),
+	('ww3t', 'ww3t description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ4EYfvxJtFlXNcuAo1fM7nHeSqNQQVD_rHRb7Rn3GBqDDuCI9n&usqp=CAU', true, 200),
+	('t32k', 't32k description...', 'https://technabob.com/blog/wp-content/uploads/2010/07/pac_man_ghost_key_caps.jpg', false, 300),
+	('kpt5', 'kpt5 description...', 'https://technabob.com/blog/wp-content/uploads/2010/07/pac_man_ghost_key_caps.jpg', false, 250),
+	('pp3t', 'pp3t description...', 'https://technabob.com/blog/wp-content/uploads/2010/07/pac_man_ghost_key_caps.jpg', true, 250),
+	('r35h', 'r35h description...', 'https://i.chzbgr.com/full/3879885824/hDA0D4985/cupcake-key-covers', true, 250),
+	('rpo5', 'rpo5 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS-_U8UPZYFT-28FXt8a5gdHeqbTbXO28RW4TcMo3GeaoARvUqA&usqp=CAU', true, 200),
+	('5dtr', '5dtr description...', 'https://images.dlf.org.uk/mee/classes_photos/2189.jpg', true, 100),
+	('uwe3', 'uwe3 description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEd8KjCujMbffilt0GNvqvoNAaOSR7JzwDJL8-rY_h3Hv44v1h&usqp=CAU', false, 200),
+	('ht4s', 'ht4s description...', 'https://m.media-amazon.com/images/I/51C9SaaOeEL._AC_UY218_ML3_.jpg', true, 100),
+	('4gfs', '4gfs description...', 'https://www.genuinefred.com/media/catalog/product/cache/8c8369e389187f1432832934c0ce3fec/M/K/MKEY_5.jpg', true, 100),
+	('dd7t', 'dd7t description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT-ODUUuKWjiurc_Q03ZWd-MsaGYmwJxTvIpAwqrlG69tY5DAEo&usqp=CAU', true, 200),
+	('ppd4', 'ppd4 description...', 'https://cdn.shopify.com/s/files/1/0036/4806/1509/products/s0391406_68a6a424-ca75-40b8-85af-b4e7f1f06336.jpg?v=1583490308', false, 200),
+	('ppd3', 'ppd3 description...', 'https://images-na.ssl-images-amazon.com/images/I/71cJ6IHXrpL._SL1500_.jpg', true, 100),
+	('ppd7', 'ppd7 description...', 'https://cdn.pricearchive.org/images/aliexpress.com/32960392704/Car-Keychains-Auto-Metal-Key-chain-Key-Ring-For-BMW-3-5-7-Series-X1-X3.jpg', true, 100),
+	('aav4', 'aav4 description...', 'https://i.pinimg.com/736x/f8/91/1d/f8911d2bc09aa86f366862377fadcd4b.jpg', true, 200),
+	('a4ad', 'a4ad description...', 'https://i.chzbgr.com/full/3879885824/hDA0D4985/cupcake-key-covers', false, 200),
+	('a5as', 'a5as description...', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT34SP9w3PDf-xzbemS32tSW2fgCfizwDORPUmbadjWAuZZzsxL&usqp=CAU', true, 200),
+	('ua32', 'ua32 description...', 'https://cdn.shopify.com/s/files/1/2423/8983/products/product-image-683246123_1024x1024.jpg?v=1571710048', false, 2500),
+	('gt07', 'gt07 description...', 'https://m.media-amazon.com/images/I/51C9SaaOeEL._AC_UY218_ML3_.jpg', true, 200),
+	('a0hf', 'a0hf description...', 'https://i.ebayimg.com/images/g/Lp8AAOSwjedcjm8D/s-l300.jpg', true, 200),
+	('a0hj', 'a0hj description...', 'https://images-na.ssl-images-amazon.com/images/I/71mAo-bfElL._AC_SX425_.jpg', true, 200),
+	('ijk3', 'ijk3 description...', 'https://images-na.ssl-images-amazon.com/images/I/61pGOuiqmGL._SL1000_.jpg', false, 200),
+	('33gd', '33gd description...', 'https://www.superfunstuff.co.uk/ekmps/shops/superfunstuffc/images/metal-earth-globe-keyring-1-inch-18561-p.jpg', true, 200),
+	('5ah4', '5ah4 description...', 'https://cdn.pricearchive.org/images/aliexpress.com/32960392704/Car-Keychains-Auto-Metal-Key-chain-Key-Ring-For-BMW-3-5-7-Series-X1-X3.jpg', true, 200)
+
+
+
+
+
+
+
+
+
+
+	

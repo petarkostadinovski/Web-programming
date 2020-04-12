@@ -3,7 +3,6 @@ import React from "react";
 import {Link, withRouter} from "react-router-dom";
 
 import '../App.css';
-import carService from '../Repository/axiosCarRepository'
 import qs from "qs";
 import Axios from "../custom-axios/axios";
 
