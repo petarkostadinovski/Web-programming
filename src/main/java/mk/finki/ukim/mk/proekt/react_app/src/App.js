@@ -11,7 +11,7 @@ import {BrowserRouter} from "react-router-dom";
 import NavBarComponent from "./Components/MainPageComponent/NavBarComponent";
 import SideBarComponent from "./Components/MainPageComponent/SideBarComponent";
 import SignUpComponent from "./Components/login/signUpComponent";
-import auth from "./Components/login/auth";
+import PaginacionTabla from "./Components/Pagination";
 import EditProfileComponent from "./Components/login/EditProfileComponent";
 import MainPageComponent from "./Components/MainPageComponent/MainPageComponent";
 import HomePageComponent from "./Components/MainPageComponent/HomePageComponent";
@@ -20,6 +20,7 @@ import car_keychains_image from "./images/car_keychains_image.jpg";
 import KeychainService from "./Repository/axiosKeychainRepository";
 import KeyChainComponent from "./Components/KeyChainComponent";
 import KeychainComponentDetails from "./Components/KeychainComponentDetails";
+import SearchCarBrandComponent from "./Components/FilterComponent/SearchCarBrandComponent";
 
 
 class App extends React.Component{
@@ -88,7 +89,16 @@ class App extends React.Component{
                             <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
                                 <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
                             </table>
-                        </div>{keysData}</div>}>
+                        </div>
+
+                            <div style={{"position":"relative","top":"-50px"}}>
+                                <PaginacionTabla
+                                    itemsperpage={5}
+                                    items={keysData}
+                                    pagesspan={4}
+                                />
+                            </div>
+                        </div>}>
                     </Route>
                 </div>
 
@@ -100,7 +110,15 @@ class App extends React.Component{
                             <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
                                 <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keys</span></th><tr><Link to="/keys"><img src={car_keys_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
                             </table>
-                        </div>{keychainsData}</div>}>
+                        </div>
+                            <div style={{"position":"relative","top":"-50px"}}>
+                                <PaginacionTabla
+                                    itemsperpage={5}
+                                    items={keychainsData}
+                                    pagesspan={4}
+                                />
+                            </div>
+                        </div>}>
                     </Route>
                 </div>
 
@@ -130,9 +148,41 @@ class App extends React.Component{
                 <div className="keysData">
                     <Route
                         path={"/cars/filteredByKeys"}
-                        component={FilteredByKeys}>
+                        render={(props) => <div>
+                                                <div className="rightSidebar" style={{"marginTop":"1px"}}>
+                                                    <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
+                                                        <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keys</span></th><tr><Link to="/keys"><img src={car_keys_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                                        <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                                    </table>
+                                                </div>
+                                                        <h3 style={{"marginLeft":"10px","position":"relative","top":"-50px", "color":"darkgray"}}>Filtered keys by car informations</h3>
+                                                    <div>
+                                                         <FilteredByKeys {...props}/>
+                                                    </div>
+                                      </div>
+                        }>
                     </Route>
                 </div>
+
+                <div className="keysData">
+                    <Route
+                        path={`/cars/keysByCarBrand`}
+                        render={(props) => <div>
+                            <div className="rightSidebar" style={{"marginTop":"1px"}}>
+                                <table style={{"border" : "3px solid lightblue","border-collapse" : "collapse"}}>
+                                    <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Keys</span></th><tr><Link to="/keys"><img src={car_keys_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                    <th><span style={{"color":"black","position":"relative","float":"left","fontSize":"20px"}}>Key chains</span></th><tr><Link to="/keychains"><img src={car_keychains_image} style={{"position":"relative"}} className="car_keychains_image_side"/></Link></tr>
+                                </table>
+                            </div>
+                            <h3 style={{"marginLeft":"60px","position":"relative","top":"-50px", "color":"darkgray"}}>Filtered keys by car brand</h3>
+                            <div>
+                                <SearchCarBrandComponent {...props}/>
+                            </div>
+                        </div>
+                        }>
+                    </Route>
+                </div>
+
                 <div className="keysData">
                     <Route
                         path={"/users/signUp"}

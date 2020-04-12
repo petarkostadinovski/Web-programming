@@ -19,6 +19,7 @@ class SideBarComponent extends React.Component{
             searchValue: ""
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     handleChange(event){
@@ -28,6 +29,21 @@ class SideBarComponent extends React.Component{
         })
         if (value !== 'Select')
             this.props.history.push(`${value}`)
+    }
+    handleSearch(event){
+        const {name,value} = event.target;
+        this.setState({
+            [name]:value
+        })
+    }
+
+    handleClick = () => {
+        this.props.history.push({
+            pathname:`/cars/keysByCarBrand`,
+            state: {
+                searchedBrand: this.state.searchValue
+            }
+        })
     }
 
     toggleFilterCarsModal = () => {
@@ -88,10 +104,10 @@ class SideBarComponent extends React.Component{
                                 <div>
                                     <button className="btn btn-info" type="submit" onClick={this.toggleFilterCarsModal}>Filter Cars</button>
                                     <div className="btn-group mr-2">
-                                        <input className="form-control mr-sm-2 " name="searchValue" type="text" placeholder="Search" onChange={this.handleChange}
+                                        <input className="form-control mr-sm-2 " name="searchValue" type="text" placeholder="Search" onChange={this.handleSearch}
                                                aria-label="Search"/>
                                     </div>
-                                    <button type="button" className="btn btn-secondary" name="searchValue" onClick={this.searchKey}>Search</button>
+                                    <button type="button" className="btn btn-secondary" name="searchValue" onClick={this.handleClick}>Search</button>
                                 </div>
                             </div>
                         </div>

@@ -5,15 +5,8 @@ import "../../App.css"
 import userProfileImage from "../../images/userProfileImage.png"
 import keyStoreLogoImg from "../../images/KeyStoreLogo.png"
 import {Link} from "react-router-dom";
-import TextTransition, { presets } from "react-text-transition";
 import PasswordMask from 'react-password-mask';
 
-const TEXTS = [
-    "Forest",
-    "Building",
-    "Tree",
-    "Color"
-];
 
 const NavBarComponent = props => {
 
@@ -104,7 +97,8 @@ const NavBarComponent = props => {
                         localStorage.setItem("username","")
                         localStorage.setItem("password","")
                         localStorage.setItem("linkToProfile",false)
-                        localStorage.setItem("savedProducts","")
+                        localStorage.setItem("savedKeys","")
+                        localStorage.setItem("savedKeychains","")
                         localStorage.setItem("loggedOut","true")
                         props.history.push({
                             pathname:`/`,
@@ -118,14 +112,18 @@ const NavBarComponent = props => {
 
                         const fetchItemById =  await fetch(`/api/users/${localStorage.getItem("username")}`);
                         const item = await fetchItemById.json();
-                        localStorage.setItem("savedProducts",JSON.stringify(item.keyList))
+                        console.log("ITEMMMMMMM")
+                        console.log(item)
+                        localStorage.setItem("savedKeys",JSON.stringify(item.keyList))
+                        localStorage.setItem("savedKeychains",JSON.stringify(item.keyChainList))
 
                         props.history.push({
                             pathname:`/users/profile`,
                             state: {
                                 username: localStorage.getItem("username"),
                                 password: localStorage.getItem("password"),
-                                keyList: JSON.parse(localStorage.getItem("savedProducts"))
+                                keyList: JSON.parse(localStorage.getItem("savedKeys")),
+                                keyChainList: JSON.parse(localStorage.getItem("savedKeychains"))
                             }
                         })
                     }}>View profile</button>
@@ -152,12 +150,14 @@ const NavBarComponent = props => {
 
                         </ul>
                         <div className="form-inline my-2 my-lg-0">
-                                <div><input className="form-control mr-sm-2 " type="text" name="username" placeholder="Username" onChange={handleUsername} aria-label="Search"/>
-                                <PasswordMask id="password" name="password" placeholder="Enter password" value={password} onChange={handlePassword} useVendorStyles={true} className="form-control mr-sm-2 "/></div>
+                                <div><input className="form-control mr-sm-2 " type="text" id="username" name="username" placeholder="Username" onChange={handleUsername} aria-label="Search"/>
+                                <PasswordMask id="password" name="password" id="password" placeholder="Enter password" value={password} onChange={handlePassword} useVendorStyles={true} className="form-control mr-sm-2 "/></div>
                                 <div><button className="btn btn-success my-2 mr-sm-1" type="submit" onClick={() => {
                                     localStorage.setItem("loggedOut","false")
                                     if ((username === "" || password === "")){
                                         window.alert("Please enter all the inputs")
+                                        document.getElementById("username").value = ""
+                                        document.getElementById("password").value = ""
                                     }
                                     else
                                         props.history.push({

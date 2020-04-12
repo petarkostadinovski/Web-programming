@@ -54,16 +54,20 @@ class FilterCarsComponent extends React.Component{
         if (!this.state.showModal)
          window.location.reload(false);
 
-        this.props.history.push({
-            pathname:"/cars/filteredByKeys",
-            state: {
-                carModel: this.state.carModel,
-                carBrand: this.state.carBrand,
-                year: this.state.year
-            }
-        })
-        console.log("godina: " + this.state.year)
+        if (this.state.carBrand === "" || this.state.carModel === "")
+            window.alert("Please select brand and model")
 
+        else {
+            this.props.history.push({
+                pathname: "/cars/filteredByKeys",
+                state: {
+                    carModel: this.state.carModel,
+                    carBrand: this.state.carBrand,
+                    year: this.state.year
+                }
+            })
+            console.log("godina: " + this.state.year)
+        }
     };
 
     render() {

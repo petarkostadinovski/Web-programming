@@ -5,8 +5,6 @@ import mk.finki.ukim.mk.proekt.model.Key;
 import java.util.List;
 import java.util.Optional;
 
-
-
 public interface KeyService {
     Key createKey(String name, double size, String description, int price, boolean onStock,String imageUrl);
 

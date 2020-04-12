@@ -54,6 +54,22 @@ public class CarServiceImpl implements CarService {
         return car1.getKeyList();
 
     }
+
+    @Override
+    public List<Key> searchKeysByCarBrand(String carBrand) {
+
+        List<Car> filteredCars;
+
+        filteredCars = this.carRepository.getAllCars().stream()
+                .filter(car -> car.getCarBrand().equals(carBrand))
+                .collect(Collectors.toList());
+
+        return filteredCars.stream()
+                .flatMap(car -> car.getKeyList().stream())
+                .collect(Collectors.toList());
+
+    }
+
     @Override
     public List<Car> searchCarsNewerThan(int year) {
         return this.carRepository.getAllCars().stream()

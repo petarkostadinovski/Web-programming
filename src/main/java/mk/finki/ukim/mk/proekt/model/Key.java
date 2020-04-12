@@ -5,10 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Comparator;
 
 @Entity
 @Data
-public class Key {
+public class Key implements Comparable<Key>{
 
     @Id
     private String name;
@@ -106,5 +107,10 @@ public class Key {
 
         return String.format("On stock: %s\nName: %s\nSize: %.2fcm\nPrice: %dДЕН\nDescription: %s",
                             this.onStock ? "Da" : "Ne", this.name, this.size, this.price, this.description);
+    }
+
+    @Override
+    public int compareTo(Key o) {
+        return Comparator.comparing(Key::getName).compare(this,o);
     }
 }

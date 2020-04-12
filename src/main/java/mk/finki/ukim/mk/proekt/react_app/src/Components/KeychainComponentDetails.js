@@ -19,7 +19,7 @@ function KeychainComponentDetails({match}){
     }
 
     return(
-        <div><h1> INFO... {item.name}</h1>
+        <div><b style={{"fontSize":"25px"}}>Details for: <span style={{"marginLeft":"2px"}}>{item.name}</span></b>
             <div className="cardStyleById" >
                 <div className="card text-white bg-light mb-3" styles="max-width: 10rem;">
                     <div className="card-header">Name: {item.name}</div>

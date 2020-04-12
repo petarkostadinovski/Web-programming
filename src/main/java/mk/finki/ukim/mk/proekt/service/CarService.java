@@ -34,4 +34,6 @@ public interface CarService {
 
     List<Key> searchKeysByCar(String carBrand, String carModel, int year) throws CarNotFoundException;
 
+    List<Key> searchKeysByCarBrand(String carBrand);
+
 }

@@ -8,8 +8,6 @@ import car_keys_image from "../../images/car_keys_image.jfif"
 
 
 const HomePageComponent = props => {
-
-
     return(
         <div>
             <div className="cardStyle" style={{"width":"1000px","position":"relative"}}>

@@ -17,7 +17,6 @@ public class Car {
     @Id
     String carId;
 
-
     @OneToMany(mappedBy = "car",cascade = CascadeType.ALL)
     private List<Key> keyList;
 

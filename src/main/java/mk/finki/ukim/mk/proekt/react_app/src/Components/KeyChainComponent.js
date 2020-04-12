@@ -30,10 +30,15 @@ class KeyChainComponent extends React.Component{
     }
 
     fetchItem = async () => {
-        let count = 0;
+        let count = 0, fetchItemById;
+
         if (localStorage.getItem("isAuth") === "true") {
-            count = JSON.parse(localStorage.getItem("savedProducts")).filter(key => key.name === this.props.name).length
+            fetchItemById =  await fetch(`/api/users/${localStorage.getItem("username")}`);
+            const item = await fetchItemById.json();
+
+            count = item.keyChainList.filter(keychain => keychain.name === this.props.name).length
         }
+
         if (count !== 0)
             this.setState({
                 added:true
@@ -52,21 +57,27 @@ class KeyChainComponent extends React.Component{
                             <p>Click here for more details...</p></Link>
                             <span className="editAndRemoveBtn">
                                 {!this.state.added ?
-                                    <button type="button" className="btn btn-outline-primary" onClick={() => {
+                                    <button type="button" className="btn btn-primary" onClick={() => {
                                         if (localStorage.getItem("isAuth") === "false") {
                                             window.alert("Please log in!")
                                         }
                                         else {
-                                            const data = [...new Array(JSON.parse(localStorage.getItem("savedProducts")))];
+                                            const data = [...new Array(JSON.parse(localStorage.getItem("savedKeychains")))];
 
                                             const keys = {
+                                                username:localStorage.getItem("username"),
                                                 password:localStorage.getItem("password"),
-                                                name: this.props.name,
-                                                size: this.props.size,
-                                                description: this.props.description,
-                                                price: this.props.price,
-                                                onStock: this.props.onStock,
-                                                imageUrl:this.props.imageUrl
+                                                nameKey: "",
+                                                sizeKey: 0,
+                                                descriptionKey: "",
+                                                priceKey: 0,
+                                                onStockKey: false,
+                                                imageUrlKey:"",
+                                                nameKeychain: this.props.name,
+                                                descriptionKeychain: this.props.description,
+                                                priceKeychain: this.props.price,
+                                                onStockKeychain: this.props.onStock,
+                                                imageUrlKeychain:this.props.imageUrl
                                             }
 
                                             const formParams = qs.stringify(keys);
@@ -86,12 +97,17 @@ class KeyChainComponent extends React.Component{
                                     : <button type="button" className="btn btn-outline-primary" onClick={() => {
                                         const keysChains = {
                                             password:localStorage.getItem("password"),
-                                            name: this.props.name,
-                                            size: this.props.size,
-                                            description: this.props.description,
-                                            price: this.props.price,
-                                            onStock: this.props.onStock,
-                                            imageUrl:this.props.imageUrl
+                                            nameKey: "",
+                                            sizeKey: 0,
+                                            descriptionKey: "",
+                                            priceKey: 0,
+                                            onStockKey: false,
+                                            imageUrlKey:"",
+                                            nameKeychain: this.props.name,
+                                            descriptionKeychain: this.props.description,
+                                            priceKeychain: this.props.price,
+                                            onStockKeychain: this.props.onStock,
+                                            imageUrlKeychain:this.props.imageUrl
                                         }
 
                                         const formParams = qs.stringify(keysChains);

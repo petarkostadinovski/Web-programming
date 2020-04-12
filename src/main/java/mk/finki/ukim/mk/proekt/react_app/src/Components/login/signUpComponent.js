@@ -25,19 +25,22 @@ const SignUpComponent = props => {
             window.alert("Username already exists")
 
         else {
-            return Axios.post('/api/users', {
-                username: username,
-                password: password,
-                keyList: []
-            }).then(function () {
-                if (!window.alert("Successfuly signed up"))
-                    props.history.push("/")
-            }).then(function (response) {
-                console.log(response);
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            if (password.length <= 5)
+                window.alert("Your password should be longer than 5 characters!")
+            else
+                return Axios.post('/api/users', {
+                    username: username,
+                    password: password,
+                    keyList: []
+                }).then(function () {
+                    if (!window.alert("Successfuly signed up"))
+                        props.history.push("/")
+                }).then(function (response) {
+                    console.log(response);
+                })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
         }
     }
 
@@ -47,8 +50,8 @@ const SignUpComponent = props => {
                 <div className="card text-white bg-light mb-3">
                     <h1><i className="signUpHeader">Sign up</i></h1>
 
-                        <input type="text" placeholder="Enter username" onChange={handleUsername}/><br/>
-                        <PasswordMask type="text" placeholder="Enter password" onChange={handlePassword} useVendorStyles={true}/><br/>
+                        <input type="text"placeholder="Enter username" onChange={handleUsername}/><br/>
+                        <span style={{"position":"relative","top":"-10px"}}><PasswordMask id="password" name="password" id="password" placeholder="Enter password" value={password} onChange={handlePassword} useVendorStyles={true} className="form-control mr-sm-2 "/></span>
 
                         <div><button className="btnSignUp" onClick={handleSubmit}>Submit</button></div>
                 </div>
